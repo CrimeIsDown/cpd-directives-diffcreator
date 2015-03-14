@@ -13,7 +13,16 @@ $html = '';
 // $file = substr($link, strrpos($link, '/directives/data')+1, strpos($link, '.html')-strrpos($link, '/directives/data')+4).'?ownapi=1';
 
 $wrapper = new GitWrapper();
-$git = $wrapper->workingCopy('.');
+
+$git_path = __DIR__.'/directives';
+
+if (file_exists($git_path)) {
+    $git = $wrapper->workingCopy($git_path);
+    $git->pull();
+} else {
+    $git = $wrapper->clone('git://github.com/EricTendian/cpd-directives.git', $git_path);
+}
+
 $git->log();
 
 $commits = array_values(preg_grep('/^commit /', explode("\n", $git->getOutput())));
@@ -55,16 +64,6 @@ for ($i = 0; $i < count($commits); $i+=2) {
 
     foreach ($directives as $cnt => $file) {
         $file_path = $public_path.$diff_path.'/'.$file;
-        // if (file_exists($file_path)) {
-        //     $git->show($commits[$i].':'.$file);
-        //     $new = $git->getOutput();
-        //     $title = [];
-        //     preg_match('/<title>(.*?)<\/title>/', $new, $title);
-        //     $title = $title[1];
-        //     $html .= '<a href="'.$diff_path.'/'.$file.'">'.$title.'</a>'.PHP_EOL;
-        //     // we already made the diff, skipping
-        //     continue;
-        // }
 
         // echo 'git log '.$commits[$i+1].' '.$file.PHP_EOL;
         // $git->log($commits[$i+1], $file);
@@ -73,32 +72,41 @@ for ($i = 0; $i < count($commits); $i+=2) {
         //     continue;
         // }
 
-        try {
-            $git->show($commits[$i+1].':'.$file);
-            $old = $git->getOutput();
+        if (file_exists($file_path)) {
             $git->show($commits[$i].':'.$file);
             $new = $git->getOutput();
-        } catch (Exception $e) {
-            echo $e->getMessage().PHP_EOL;
-            continue;
+            $title = [];
+            preg_match('/<title>(.*?)<\/title>/', $new, $title);
+            $title = $title[1];
+        } else {
+            try {
+                $git->show($commits[$i+1].':'.$file);
+                $old = $git->getOutput();
+                $git->show($commits[$i].':'.$file);
+                $new = $git->getOutput();
+            } catch (Exception $e) {
+                echo $e->getMessage().PHP_EOL;
+                continue;
+            }
+
+            if (strip_tags($old)==strip_tags($new)) break;
+
+            $title = [];
+            preg_match('/<title>(.*?)<\/title>/', $new, $title);
+            $title = $title[1];
+
+            $diff = new HtmlDiff($old, $new);
+            $diff->build();
+            $difference = str_replace('="ContentPackages/', '="http://directives.chicagopolice.org/directives/data/ContentPackages/', $diff->getDifference());
+
+            if (!is_dir(substr($file_path, 0, strrpos($file_path, '/')))) {
+                mkdir(substr($file_path, 0, strrpos($file_path, '/')), 0777, true);
+            }
+            file_put_contents($file_path, $difference);
         }
 
-        if (strip_tags($old)==strip_tags($new)) break;
-
-        $title = [];
-        preg_match('/<title>(.*?)<\/title>/', $new, $title);
-        $title = $title[1];
-
-        $diff = new HtmlDiff($old, $new);
-        $diff->build();
-        $difference = str_replace('="ContentPackages/', '="http://directives.chicagopolice.org/directives/data/ContentPackages/', $diff->getDifference());
-
-        if (!is_dir(substr($file_path, 0, strrpos($file_path, '/')))) {
-            mkdir(substr($file_path, 0, strrpos($file_path, '/')), 0777, true);
-        }
-        file_put_contents($file_path, $difference);
-
-        $html .= '<li><a href="'.$diff_path.'/'.urlencode($file).'">'.$title.'</a></li>'.PHP_EOL;
+        $file = substr($file, 0, strrpos($file, '/')+1).urlencode(substr($file, strrpos($file, '/')+1));
+        $html .= '<li><a href=".'.$diff_path.'/'.$file.'">'.$title.'</a></li>'.PHP_EOL;
 
         echo 'Directive '.($cnt+1).' out of '.count($directives).' complete'.PHP_EOL;
     }
@@ -108,5 +116,7 @@ for ($i = 0; $i < count($commits); $i+=2) {
 }
 
 file_put_contents($public_path.'/index.html', $html);
+
+// TODO: upload to S3
 
 ?>

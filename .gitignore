@@ -1,3 +1,4 @@
+/directives/
 /public/*
 /vendor/
 !.gitkeep
