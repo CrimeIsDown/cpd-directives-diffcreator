@@ -7,3 +7,4 @@ rmdir directives.chicagopolice.org
 git add -A
 git commit -m "Directives as of `date +'%B %-e, %Y'`"
 git push
+cd ..
