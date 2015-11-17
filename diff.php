@@ -1,122 +1,194 @@
 <?php
-
 require __DIR__.'/vendor/autoload.php';
 
 use GitWrapper\GitWrapper;
 use Caxy\HtmlDiff\HtmlDiff;
 
-$public_path = __DIR__.'/public';
+class DirectiveDiffer
+{
+    const PUBLIC_PATH = __DIR__.'/public';
+    private $commit;
+    private $file;
+    private $git;
 
-$html = '';
+    public function __construct($commit, $file, $git)
+    {
+        $this->commit = $commit;
+        $this->file = $file;
+        $this->git = $git;
+    }
 
-// $link = 'http://directives.chicagopolice.org/directives/data/a7a57be2-1290de63-7db12-90f0-e9796f7bbbc1a2d2.html?hl=true';
-// $file = substr($link, strrpos($link, '/directives/data')+1, strpos($link, '.html')-strrpos($link, '/directives/data')+4).'?ownapi=1';
-
-$wrapper = new GitWrapper();
-
-$git_path = __DIR__.'/directives';
-
-if (file_exists($git_path)) {
-    $git = $wrapper->workingCopy($git_path);
-    $git->pull();
-} else {
-    $git = $wrapper->clone('git://github.com/EricTendian/cpd-directives.git', $git_path);
-}
-
-$git->log();
-
-$commits = array_values(preg_grep('/^commit /', explode("\n", $git->getOutput())));
-foreach ($commits as $key => $value) {
-    $commits[$key] = str_replace('commit ', '', $value);
-}
-
-for ($i = 0; $i < count($commits); $i+=2) {
-    if (!isset($commits[$i+1])) break;
-
-    $git->diff($commits[$i+1], $commits[$i]);
-    $diffs = explode("\n", $git->getOutput());
-
-    $directives = [];
-    foreach ($diffs as $index=>$line) {
-        if (strpos($line, '+<td class="td1">Issue Date:</td>')!==false) {
-            for ($j = $index; $j > 0; $j--) {
-                if (strpos($diffs[$j], '+++ b/')!==false) {
-                    array_push($directives, substr($diffs[$j], 6));
-                    break;
-                }
+    public function generate()
+    {
+        $new = $this->getNewFile();
+        if ($new) {
+            $old = $this->getOldFile($new);
+            if ($old) {
+                $difftext = $this->generateDiff($old, $new);
+                $this->writeDiff($difftext);
+                return $this->getMetadata($new);
             }
+        }
+        return false;
+    }
+
+    private function getNewFile()
+    {
+        try {
+            $this->git->show($this->commit.':'.$this->file);
+            return $this->git->getOutput();
+        } catch (\Exception $e) {
+            return false;
         }
     }
 
-    $git->log('--format=%B', '-n', '1', $commits[$i+1]);
-    $old = trim($git->getOutput());
-    $git->log('--format=%B', '-n', '1', $commits[$i]);
-    $new = trim($git->getOutput());
-
-    $html .= PHP_EOL.'<h2>Changed between "'.$old.'" and "'.$new.'"</h2>'.PHP_EOL;
-
-    $diff_path = '/diff/'.$commits[$i+1].'_'.$commits[$i];
-    if (!is_dir($public_path.$diff_path)) {
-        mkdir($public_path.$diff_path, 0777, true);
+    private function getOldFile($new)
+    {
+        try {
+            $this->git->show($this->commit.'^1:'.$this->file);
+            return $this->git->getOutput();
+        } catch (\Exception $e) {
+            $this->writeDiff($new);
+            return false;
+        }
     }
 
-    $html .= '<ul>'.PHP_EOL;
+    private function generateDiff($old, $new)
+    {
+        $diff = new HtmlDiff($old, $new);
+        $diff->build();
+        return $diff->getDifference();
+    }
 
-    foreach ($directives as $cnt => $file) {
-        $file_path = $public_path.$diff_path.'/'.$file;
+    private function writeDiff($difftext)
+    {
+        $difftext = str_replace('="ContentPackages/', '="http://directives.chicagopolice.org/directives/data/ContentPackages/', $difftext);
+        file_put_contents(self::PUBLIC_PATH."/diff/$this->commit/$this->file", $difftext);
+    }
 
-        // echo 'git log '.$commits[$i+1].' '.$file.PHP_EOL;
-        // $git->log($commits[$i+1], $file);
-        // if (empty($git->getOutput())) {
-        //     // new file, skipping
-        //     continue;
-        // }
+    private function getMetadata($html)
+    {
+        $metadata = ['path' => $this->commit.'/'.$this->file];
 
-        if (file_exists($file_path)) {
-            $git->show($commits[$i].':'.$file);
-            $new = $git->getOutput();
-            $title = [];
-            preg_match('/<title>(.*?)<\/title>/', $new, $title);
-            $title = $title[1];
+        preg_match('/<title>(.*?)<\/title>/', $html, $matches);
+        if (count($matches)) {
+            $metadata['title'] = $matches[1];
+            $metadata['link'] = '<a href="./diff/'.$metadata['path'].'">'.$metadata['title'].'</a>';
+        }
+
+        preg_match('/<td class="td1">Issue Date:<\/td><td class="td2">(.*?)<\/td>/', $html, $matches);
+        if (count($matches)) $metadata['issue_date'] = $matches[1];
+
+        preg_match('/<td class="td1">Effective Date:<\/td><td class="td2">(.*?)<\/td>/', $html, $matches);
+        if (count($matches)) $metadata['effective_date'] = $matches[1];
+
+        preg_match('/<td class="td1">Rescinds:<\/td><td class="td3" colspan="3">(.*?)<\/td>/', $html, $matches);
+        if (count($matches)) $metadata['rescinds'] = $matches[1];
+
+        preg_match('/<td class="CPDDirectiveTypeAndNumber">(.*?)&nbsp;(.*?)<\/td>/', $html, $matches);
+        if (count($matches)) $metadata['index_category'] = $matches[1];
+
+        preg_match('/<td class="td1">Index Category:<\/td><td class="td3" colspan="3">(.*?)<\/td>/', $html, $matches);
+        if (count($matches)) $metadata['index_category'] .= ' - '.$matches[1];
+
+        if (count($metadata) == 7) {
+            return (object) $metadata;
+        }
+    }
+}
+
+class ChangeFinder
+{
+    const PUBLIC_PATH = __DIR__.'/public';
+    const GIT_PATH = __DIR__.'/directives';
+    private $finished_diffs;
+    private $git;
+
+    public function __construct()
+    {
+        $wrapper = new GitWrapper();
+        if (file_exists(self::GIT_PATH)) {
+            $this->git = $wrapper->workingCopy(self::GIT_PATH);
         } else {
-            try {
-                $git->show($commits[$i+1].':'.$file);
-                $old = $git->getOutput();
-                $git->show($commits[$i].':'.$file);
-                $new = $git->getOutput();
-            } catch (Exception $e) {
-                echo $e->getMessage().PHP_EOL;
-                continue;
-            }
-
-            if (strip_tags($old)==strip_tags($new)) break;
-
-            $title = [];
-            preg_match('/<title>(.*?)<\/title>/', $new, $title);
-            $title = $title[1];
-
-            $diff = new HtmlDiff($old, $new);
-            $diff->build();
-            $difference = str_replace('="ContentPackages/', '="http://directives.chicagopolice.org/directives/data/ContentPackages/', $diff->getDifference());
-
-            if (!is_dir(substr($file_path, 0, strrpos($file_path, '/')))) {
-                mkdir(substr($file_path, 0, strrpos($file_path, '/')), 0777, true);
-            }
-            file_put_contents($file_path, $difference);
+            die('Cannot locate repository');
         }
 
-        $file = substr($file, 0, strrpos($file, '/')+1).urlencode(substr($file, strrpos($file, '/')+1));
-        $html .= '<li><a href=".'.$diff_path.'/'.$file.'">'.$title.'</a></li>'.PHP_EOL;
-
-        echo 'Directive '.($cnt+1).' out of '.count($directives).' complete'.PHP_EOL;
+        if (file_exists(self::PUBLIC_PATH.'/diff_list.json')) {
+            $this->finished_diffs = json_decode(file_get_contents(self::PUBLIC_PATH.'/diff_list.json'));
+        } else {
+            $this->finished_diffs = [];
+            file_put_contents(self::PUBLIC_PATH.'/diff_list.json', json_encode($this->finished_diffs));
+        }
     }
-    $html .= '</ul>'.PHP_EOL;
 
-    echo 'Diff set '.(($i+2)/2).' out of '.(count($commits)/2).PHP_EOL;
+    // find the commits that we have not checked for diffs
+    public function getCommitsToDiff()
+    {
+        $this->git->log('--format=%H');
+        $commits = split("\n", trim($this->git->getOutput()));
+        $to_check = [];
+
+        foreach ($commits as $i => $commit) {
+            if (!file_exists(self::PUBLIC_PATH.'/diff/'.$commit)) {
+                $to_check[] = $commit;
+            }
+        }
+
+        echo 'Need to diff '.max(0, count($to_check)-1).' commits out of a total '.(count($commits)-1).PHP_EOL;
+
+        return $to_check;
+    }
+
+    public function getFilesChangedInCommit($commit, &$changed_files)
+    {
+        mkdir(self::PUBLIC_PATH."/diff/$commit/directives/data/", 0777, true);
+        try {
+            $this->git->diff($commit, $commit.'^1', '--numstat', '-w', '--no-abbrev');
+            $file_list = split("\n", trim($this->git->getOutput()));
+        } catch (\GitWrapper\GitException $e)  {
+            return false; // probably first commit
+        }
+
+        foreach ($file_list as $i => $file) {
+            preg_match('/^([0-9]+)\t([0-9]+)\t(.*)/', $file, $matches);
+            if ($matches[1] != $matches[2] && strpos($matches[3], 'toc.html')===false) {
+                $changed_files[] = ['commit' => $commit, 'path' => $matches[3]];
+            }
+        }
+    }
+
+    public function generateDiff($commit, $file)
+    {
+        $differ = new DirectiveDiffer($commit, $file, $this->git);
+        $result = $differ->generate();
+        if ($result) {
+            $this->finished_diffs[] = $result;
+        }
+    }
+
+    public function saveJson()
+    {
+        file_put_contents(self::PUBLIC_PATH.'/diff_list.json', json_encode($this->finished_diffs));
+    }
 }
 
-file_put_contents($public_path.'/index.html', $html);
+echo 'Initializing...'.PHP_EOL;
+$c = new ChangeFinder();
+$commits = $c->getCommitsToDiff();
 
-// TODO: upload to S3
+$changed_files = [];
+foreach ($commits as $commit) {
+    $c->getFilesChangedInCommit($commit, $changed_files);
+}
+
+echo 'Need to calculate diffs for '.count($changed_files).' files'.PHP_EOL;
+
+foreach ($changed_files as $i => $file) {
+    echo 'Calculating diff '.($i+1).' of '.count($changed_files).PHP_EOL;
+    $c->generateDiff($file['commit'], $file['path']);
+}
+
+echo 'Saving JSON...'.PHP_EOL;
+$c->saveJson();
 
 ?>

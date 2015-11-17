@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/caxy/php-htmldiff.git",
-                "reference": "4888c71ddca7315ca150ad1bfdb2e3cedf00963f"
+                "reference": "c7d60bdf14718266b6e884e046f0cbfa96c6d1a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/caxy/php-htmldiff/zipball/4888c71ddca7315ca150ad1bfdb2e3cedf00963f",
-                "reference": "4888c71ddca7315ca150ad1bfdb2e3cedf00963f",
+                "url": "https://api.github.com/repos/caxy/php-htmldiff/zipball/c7d60bdf14718266b6e884e046f0cbfa96c6d1a9",
+                "reference": "c7d60bdf14718266b6e884e046f0cbfa96c6d1a9",
                 "shasum": ""
             },
             "require": {
@@ -47,20 +47,20 @@
                 "diff",
                 "html"
             ],
-            "time": "2015-09-11 00:09:47"
+            "time": "2015-11-11 18:08:09"
         },
         {
             "name": "cpliakas/git-wrapper",
-            "version": "1.5.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cpliakas/git-wrapper.git",
-                "reference": "0f8c4a4dcdd6ca5b46330ab12be3a439eea16d46"
+                "reference": "5b89e9c5b4598c110e2d93d1245b4e26df3855a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cpliakas/git-wrapper/zipball/0f8c4a4dcdd6ca5b46330ab12be3a439eea16d46",
-                "reference": "0f8c4a4dcdd6ca5b46330ab12be3a439eea16d46",
+                "url": "https://api.github.com/repos/cpliakas/git-wrapper/zipball/5b89e9c5b4598c110e2d93d1245b4e26df3855a5",
+                "reference": "5b89e9c5b4598c110e2d93d1245b4e26df3855a5",
                 "shasum": ""
             },
             "require": {
@@ -102,20 +102,20 @@
             "keywords": [
                 "git"
             ],
-            "time": "2015-07-08 14:28:09"
+            "time": "2015-11-11 15:45:43"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.7.5",
+            "version": "v2.7.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "ae4dcc2a8d3de98bd794167a3ccda1311597c5d9"
+                "reference": "87a5db5ea887763fa3a31a5471b512ff1596d9b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/ae4dcc2a8d3de98bd794167a3ccda1311597c5d9",
-                "reference": "ae4dcc2a8d3de98bd794167a3ccda1311597c5d9",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/87a5db5ea887763fa3a31a5471b512ff1596d9b8",
+                "reference": "87a5db5ea887763fa3a31a5471b512ff1596d9b8",
                 "shasum": ""
             },
             "require": {
@@ -126,7 +126,6 @@
                 "symfony/config": "~2.0,>=2.0.5",
                 "symfony/dependency-injection": "~2.6",
                 "symfony/expression-language": "~2.6",
-                "symfony/phpunit-bridge": "~2.7",
                 "symfony/stopwatch": "~2.3"
             },
             "suggest": {
@@ -160,27 +159,24 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2015-09-22 13:49:29"
+            "time": "2015-10-11 09:39:48"
         },
         {
             "name": "symfony/process",
-            "version": "v2.7.5",
+            "version": "v2.7.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "b27c8e317922cd3cdd3600850273cf6b82b2e8e9"
+                "reference": "4a959dd4e19c2c5d7512689413921e0a74386ec7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/b27c8e317922cd3cdd3600850273cf6b82b2e8e9",
-                "reference": "b27c8e317922cd3cdd3600850273cf6b82b2e8e9",
+                "url": "https://api.github.com/repos/symfony/process/zipball/4a959dd4e19c2c5d7512689413921e0a74386ec7",
+                "reference": "4a959dd4e19c2c5d7512689413921e0a74386ec7",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.9"
-            },
-            "require-dev": {
-                "symfony/phpunit-bridge": "~2.7"
             },
             "type": "library",
             "extra": {
@@ -209,7 +205,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2015-09-19 19:59:23"
+            "time": "2015-10-23 14:47:27"
         }
     ],
     "packages-dev": [],
