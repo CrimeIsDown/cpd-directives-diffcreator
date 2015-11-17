@@ -1,0 +1,10 @@
+#directiveViewer iframe {
+  width: 100%;
+  height: 70vh;
+  border: none;
+}
+#directiveViewer form input {
+  margin: 0 0.25em;
+  padding: 0.4em;
+  width: 50%;
+}

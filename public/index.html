@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Chicago Police Department Directive Changes</title>
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.css">
+  <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
 
@@ -35,9 +38,16 @@
           <h4 class="modal-title">Directive Name</h4>
         </div>
         <div class="modal-body">
-          <iframe src="http://directives.crimeisdown.com/">
+          <iframe src="#">
             <p>Your browser does not support iframes. <a href="#">View the directive here.</a></p>
           </iframe>
+        </div>
+        <div class="modal-footer">
+          <form class="form-inline">
+            <label for="link">Shareable link</label>
+            <input name="link" type="text" class="form-control" readonly>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </form>
         </div>
       </div>
     </div>
@@ -46,35 +56,6 @@
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
-  <script type="text/javascript">
-    $.getJSON('diff_list.json', function(directives) {
-      $('#directives').bootstrapTable({data: directives});
-
-      $('#directives td > a').click(function (event) {
-        event.preventDefault();
-        $('#directiveViewer h4.modal-title').text($(this).text());
-        $('#directiveViewer iframe a').attr('href', $(this).attr('href'));
-        $('#directiveViewer iframe').attr('src', $(this).attr('href'));
-        $('#directiveViewer').modal();
-      });
-    });
-
-    function dateSorter(a, b) {
-      a = new Date(a);
-      b = new Date(b);
-      if (a > b) return 1;
-      if (a < b) return -1;
-      return 0;
-    }
-
-  </script>
-  <style type="text/css">
-    #directiveViewer iframe {
-      width: 100%;
-      height: 75vh;
-      border: none;
-    }
-  </style>
-
+  <script type="text/javascript" src="main.js"></script>
 </body>
 </html>
