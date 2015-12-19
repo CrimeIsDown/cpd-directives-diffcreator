@@ -10,6 +10,7 @@ $.getJSON('diff_list.json', function(directives) {
     var path = window.location.hash.substring(1);
     var title = $('#directives td > a[href="./diff/' + path + '"]').text();
     openDirective('./diff/' + path, title);
+    window.location.hash = '';
   }
 });
 
@@ -26,8 +27,8 @@ function openDirective(path, title) {
   $('#directiveViewer iframe a').attr('href', path);
   $('#directiveViewer iframe').attr('src', path);
   $('#directiveViewer').modal();
-  window.location.hash = '#' + path.substring(7);
-  $('#directiveViewer input[type="text"]').val(window.location);
+  $('#directiveViewer input[type="text"]').val(window.location + '#' + path.substring(7));
+  ga('send', 'event', 'Directive', 'open', title);
 }
 
 $('#directiveViewer form input').focus(function (event) {
@@ -37,10 +38,6 @@ $('#directiveViewer form input').focus(function (event) {
   } catch (e) {
     // not supported
   }
-});
-
-$('#directiveViewer').on('hidden.bs.modal', function () {
-    window.location.hash = '';
 });
 
 // GOOGLE ANALYTICS START
