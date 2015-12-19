@@ -26,8 +26,8 @@ class DirectiveDiffer
             if ($old) {
                 $difftext = $this->generateDiff($old, $new);
                 $this->writeDiff($difftext);
-                return $this->getMetadata($new);
             }
+            return $this->getMetadata($new);
         }
         return false;
     }
