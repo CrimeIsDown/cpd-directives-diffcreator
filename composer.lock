@@ -13,21 +13,31 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/caxy/php-htmldiff.git",
-                "reference": "a1ab725648f268dde860cfc716113cd2326e1aee"
+                "reference": "755472d2f4299b4e1918268f580768a9dc52c928"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/caxy/php-htmldiff/zipball/a1ab725648f268dde860cfc716113cd2326e1aee",
-                "reference": "a1ab725648f268dde860cfc716113cd2326e1aee",
+                "url": "https://api.github.com/repos/caxy/php-htmldiff/zipball/755472d2f4299b4e1918268f580768a9dc52c928",
+                "reference": "755472d2f4299b4e1918268f580768a9dc52c928",
                 "shasum": ""
             },
             "require": {
+                "ezyang/htmlpurifier": "^4.7",
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8"
+                "doctrine/cache": "~1.0",
+                "phpunit/phpunit": "~4.8"
+            },
+            "suggest": {
+                "doctrine/cache": "Used for caching the calculated diffs using a Doctrine Cache Provider"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Caxy\\HtmlDiff": "lib/"
@@ -50,20 +60,20 @@
                 "diff",
                 "html"
             ],
-            "time": "2016-02-09 16:38:31"
+            "time": "2016-04-20 14:33:04"
         },
         {
             "name": "cpliakas/git-wrapper",
-            "version": "1.6.1",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cpliakas/git-wrapper.git",
-                "reference": "5b89e9c5b4598c110e2d93d1245b4e26df3855a5"
+                "reference": "1a2f1131ec9ebe04a0b729b141396fa55f992d44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cpliakas/git-wrapper/zipball/5b89e9c5b4598c110e2d93d1245b4e26df3855a5",
-                "reference": "5b89e9c5b4598c110e2d93d1245b4e26df3855a5",
+                "url": "https://api.github.com/repos/cpliakas/git-wrapper/zipball/1a2f1131ec9ebe04a0b729b141396fa55f992d44",
+                "reference": "1a2f1131ec9ebe04a0b729b141396fa55f992d44",
                 "shasum": ""
             },
             "require": {
@@ -105,20 +115,64 @@
             "keywords": [
                 "git"
             ],
-            "time": "2015-11-11 15:45:43"
+            "time": "2016-04-19 16:12:33"
         },
         {
-            "name": "symfony/event-dispatcher",
-            "version": "v3.0.2",
+            "name": "ezyang/htmlpurifier",
+            "version": "v4.7.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "4dd5df31a28c0f82b41cb1e1599b74b5dcdbdafa"
+                "url": "https://github.com/ezyang/htmlpurifier.git",
+                "reference": "ae1828d955112356f7677c465f94f7deb7d27a40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/4dd5df31a28c0f82b41cb1e1599b74b5dcdbdafa",
-                "reference": "4dd5df31a28c0f82b41cb1e1599b74b5dcdbdafa",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/ae1828d955112356f7677c465f94f7deb7d27a40",
+                "reference": "ae1828d955112356f7677c465f94f7deb7d27a40",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "HTMLPurifier": "library/"
+                },
+                "files": [
+                    "library/HTMLPurifier.composer.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Edward Z. Yang",
+                    "email": "admin@htmlpurifier.org",
+                    "homepage": "http://ezyang.com"
+                }
+            ],
+            "description": "Standards compliant HTML filter written in PHP",
+            "homepage": "http://htmlpurifier.org/",
+            "keywords": [
+                "html"
+            ],
+            "time": "2015-08-05 01:03:42"
+        },
+        {
+            "name": "symfony/event-dispatcher",
+            "version": "v3.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/event-dispatcher.git",
+                "reference": "807dde98589f9b2b00624dca326740380d78dbbc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/807dde98589f9b2b00624dca326740380d78dbbc",
+                "reference": "807dde98589f9b2b00624dca326740380d78dbbc",
                 "shasum": ""
             },
             "require": {
@@ -165,20 +219,20 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2016-01-27 05:14:46"
+            "time": "2016-05-05 06:56:13"
         },
         {
             "name": "symfony/process",
-            "version": "v3.0.2",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "dfecef47506179db2501430e732adbf3793099c8"
+                "reference": "53f9407c0bb1c5a79127db8f7bfe12f0f6f3dcdb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/dfecef47506179db2501430e732adbf3793099c8",
-                "reference": "dfecef47506179db2501430e732adbf3793099c8",
+                "url": "https://api.github.com/repos/symfony/process/zipball/53f9407c0bb1c5a79127db8f7bfe12f0f6f3dcdb",
+                "reference": "53f9407c0bb1c5a79127db8f7bfe12f0f6f3dcdb",
                 "shasum": ""
             },
             "require": {
@@ -214,7 +268,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2016-02-02 13:44:19"
+            "time": "2016-04-14 15:30:28"
         }
     ],
     "packages-dev": [],
