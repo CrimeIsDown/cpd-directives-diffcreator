@@ -125,7 +125,7 @@ class ChangeFinder
     public function getCommitsToDiff()
     {
         $this->git->log('--format=%H');
-        $commits = split("\n", trim($this->git->getOutput()));
+        $commits = explode("\n", trim($this->git->getOutput()));
         $to_check = [];
 
         foreach ($commits as $i => $commit) {
@@ -144,7 +144,7 @@ class ChangeFinder
         mkdir(self::PUBLIC_PATH."/diff/$commit/directives/data/", 0777, true);
         try {
             $this->git->diff($commit, $commit.'^1', '--numstat', '-w', '--no-abbrev');
-            $file_list = split("\n", trim($this->git->getOutput()));
+            $file_list = explode("\n", trim($this->git->getOutput()));
         } catch (\GitWrapper\GitException $e)  {
             return false; // probably first commit
         }
