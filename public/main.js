@@ -26,6 +26,9 @@ function openDirective(path, title) {
   $('#directiveViewer h4.modal-title').text(title);
   $('#directiveViewer iframe a').attr('href', path);
   $('#directiveViewer iframe').attr('src', path);
+  $('#directiveViewer iframe').load(function () {
+    $(this).contents().find('head').append('<link type="text/css" rel="stylesheet" href="/iframe.css">');
+  });
   $('#directiveViewer').modal();
   $('#directiveViewer input[type="text"]').val(window.location + '#' + path.substring(7));
   ga('send', 'event', 'Directive', 'open', title);

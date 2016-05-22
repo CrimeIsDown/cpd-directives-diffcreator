@@ -1,0 +1,15 @@
+ins, del {
+  text-decoration: none;
+}
+ins.diffmod {
+  background-color: #a6f3a6;
+}
+del.diffmod {
+  background-color: #f8cbcb;
+}
+del.diffdel {
+  background-color: #ffecec;
+}
+ins.diffins {
+  background-color: #eaffea;
+}
