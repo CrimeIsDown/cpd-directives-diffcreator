@@ -1,3 +1,7 @@
+body {
+  width: 100% !important;
+  max-width: 700px !important;
+}
 ins, del {
   text-decoration: none;
 }
