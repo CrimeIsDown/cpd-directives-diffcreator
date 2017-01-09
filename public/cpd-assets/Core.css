@@ -1,0 +1,4185 @@
+/*
+
+Copyright c 2009 Xyleme, Inc., 2060 Broadway, Suite 250, Boulder, C0 80302 USA.
+All rights reserved.
+
+This file and related documentation are protected by copyright and
+are distributed under licenses regarding their use, copying, distribution,
+and decompilation. No part of this product or related documentation may
+be reproduced or transmitted in any form or by any means, electronic or
+mechanical, for any purpose, without the express written permission of
+Xyleme, Inc.
+
+*/
+
+
+
+BODY {
+        margin-top: 30px;
+        color: #000031; 
+        width: 600px;
+	text-align: left;
+	font-size: 10pt;
+}
+
+.sidenotes {
+        margin-left: 145px;
+}
+.normal {
+        margin-left: 45px;
+}
+
+.PageType {
+}
+.Page {
+}
+DIV.PageType_Title {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 15px;
+	position: relative;
+	/* left: -135px; */
+	color: #9c0031;
+}
+
+.wmIntro {
+     background: #ffffff url(../../media/Core/t_p_image1.png) right top no-repeat;
+	height: 429px;
+}
+.wmEdu {
+    background: #ffffff url(../../media/Core/e_o_bg_new.jpg) right top no-repeat;
+	height: 427px;
+}
+.wmQuest {
+    background: #ffffff url(../../media/Core/k_c_bg_new.png) right top no-repeat;
+	height: 250px;
+}
+.wmSummary {
+   background: #ffffff url(../../media/Core/summery_bg.png) right bottom no-repeat;
+}
+
+
+
+
+/* =============================== */
+/* =============================== */
+
+/* due to the clippinng bug in IE */
+/* on negative margin block */
+/* just add also position: relative; */
+
+
+
+/*--------------------------*/
+/* 
+   @ContentBlock - defined as ContentBlockType
+
+   @QuestionBlock - defined as QuestionBlockType
+   @Paragraph - defined as ParagraphType
+	Title
+   	Note
+	Warning
+	KeyPoint
+	QuoteBlock
+	Code
+	@List - defined as ListType
+	@Table - defined as TableType
+	@Figure - defined as FigureType
+
+   Glossary
+
+   @MediaObjectType - defined as MediaObjectType
+
+   @EducationalObjective - defined as EducationalObjectiveType
+   StepGroup
+
+   WebMultipleChoice
+   WebFillInBlank
+   WebSequenceActivity
+   WebMatchingActivity
+   NonScoredActivity
+   EssayActivity
+   'Next' popup for Activities
+
+   RichText
+   Slide
+
+   -------
+   ActionGroup [Demo]
+*/
+
+/* Note to using the schema-type classes */
+/* =======================================
+  elements of defined schema-type (e.g. ParagraphType) use two CSS classes: 
+
+  - first is derived from the current element name (e.g. Paragraph => class='Paragraph')
+  - second is from the element schema-type (e.g. ParagraphType => class='ParagraphType')
+
+  - 'schema-type' class is common for all elements of given schema-type
+  - 'element' class' can localy overwrite the 'schema-type' class if required
+
+  special case applies for Title, where we have to use
+  parent name or parent schema-type to create the class name
+  it is due to the child selector bug of IE
+  we create following class names:
+  - Paragraph > Title => Title_Paragraph
+  - ParagraphType > Title => ParagraphType_Title
+
+*/
+
+/*----------------------------------*/
+/* ContentBlockType begin ----------*/
+
+
+.ContentBlockType {
+        width: 100%;
+        margin: 6px 0px 6px 0px;
+	text-align: left;
+}
+
+DIV.ContentBlockType_Title {
+	font-size: 16px;
+	font-weight: bold;
+	font-style: italic;
+	color: #999999;
+	background-color: inherit;
+	padding: 12px 0px 2px 0px;
+	position: relative;
+	/* left: -135px; */
+}
+
+/* ContentBlockType end ----------*/
+/*--------------------------------*/
+
+
+/*------------------------------------*/
+/* @QuestionBlockType begin ----------*/
+
+.QuestionBlockType {
+        width: 640px;
+        margin: 6px 0px 6px 0px;
+	text-align: left;
+}
+
+.WebQuestionBlock {
+}
+
+DIV.QuestionBlockType_Title {
+	font-size: 16px;
+	font-weight: bold;
+	font-style: italic;
+	color: #999999;
+	background-color: inherit;
+	padding: 12px 0px 2px 0px;
+	position: relative;
+	/* left: -135px; */
+}
+
+/* @QuestionBlockType end ----------*/
+/*----------------------------------*/
+
+
+/*--------------------------------*/
+/* @ParagraphType begin ----------*/
+
+/* @ParagraphType classes:
+        Heading
+	Note
+	Warning
+	KeyPoint
+	Quote
+	Code
+	@List - defined as ListType
+	@Table - defined as TableType
+	@Figure - defined as FigureType
+*/
+
+.ParagraphType {
+	font-size: inherit;
+	font-weight: inherit;
+	font-style: inherit;
+	color: inherit;
+	background-color: transparent;
+	padding: 5px 0px 5px 0px;
+}
+DIV.ParagraphType_Heading {
+	font-size: inherit;
+	font-weight: bold;
+	font-style: inherit;
+	color: inherit;
+	background-color: inherit;
+	padding: 10px 0px 2px 0px;
+}
+DIV.ParagraphType DIV.Wysiwyg {
+	font-size: inherit;
+	font-weight: normal;
+	text-decoration: none;	
+	color: inherit;
+	background-color: transparent;
+	padding: 3px 0px 3px 0px;
+}
+DIV.Note {
+        border-top: 1px outset #aaaaaa;
+	border-bottom: 3px outset #aaaaaa;
+	border-left: 1px outset #aaaaaa;
+	border-right: 3px outset #aaaaaa;
+	margin:	3px 5px 3px 0px;
+	padding: 3px 2px 3px 16px;
+	width: 110px;
+	font-size: 80%;
+	font-style: normal;
+	color: inherit;
+	background-color: inherit;
+	position: absolute;
+	margin-left: -135px;
+}
+DIV.Note IMG {
+	float: left;
+	position: relative;
+	margin-left: -20px;
+	margin-top: -10px;
+	padding: 0px;
+}
+
+DIV.ParagraphType DIV SPAN.AreaIcon {
+       font-weight: bold;
+}
+/*DIV.ParagraphType DIV.Note DIV {
+       vertical-align: top;
+       padding: 5px 8px 5px 8px;
+       background-color: #dddddd;
+}*/
+DIV.ParagraphType DIV.Warning {
+	font-size: inherit;
+	font-style: italic;	
+	color: inherit;
+	background-color: inherit;
+	padding: 6px 0px 6px 0px;
+}
+DIV.ParagraphType DIV.Warning SPAN {
+	font-size: inherit;
+	font-weight: bold;
+	text-decoration: none;	
+	color: red;
+	background-color: inherit;
+}
+TABLE.PopupTable {
+	border-width: 1px;
+	border-spacing: 0px;
+	border-style: solid;
+	border-color: blue;
+	background-color: white;
+	cursor:default;
+}
+TD.PopupTitle {
+	background-color: blue; 
+	font-weight:bold;
+	color: white;
+}
+TABLE.KeyPoint {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding: 0px;
+	width: 80%;
+	border-top: 1px outset #aaaaaa;
+	border-bottom: 3px outset #aaaaaa;
+	border-left: 1px outset #aaaaaa;
+	border-right: 3px outset #aaaaaa;
+	border-spacing: 3px;
+}
+
+TABLE.KeyPoint TD.AreaIcon {
+       width: 45px;
+       vertical-align: top;
+       text-align: center;
+       font-weight: bold;
+	
+}
+TABLE.KeyPoint TD.AreaContent {
+       vertical-align: top;
+       padding: 5px 8px 5px 8px;
+       background-color: #dddddd;
+}
+
+TABLE.Caution {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding: 0px;
+	width: 80%;
+	border-top: 1px outset #aaaaaa;
+	border-bottom: 3px outset #aaaaaa;
+	border-left: 1px outset #aaaaaa;
+	border-right: 3px outset #aaaaaa;
+	border-spacing: 3px;
+}
+
+TABLE.Caution TD.AreaIcon {
+       width: 32px;
+       vertical-align: top;
+       text-align: center;
+       font-weight: bold;
+	
+}
+TABLE.Caution TD.AreaContent {
+       vertical-align: top;
+       padding: 5px 8px 5px 8px;
+	   color: #DF1B4D;
+	   background-color: #dddddd;
+}
+
+TABLE.NoteBlock {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding: 0px;
+	width: 80%;
+	border-top: 1px outset #aaaaaa;
+	border-bottom: 3px outset #aaaaaa;
+	border-left: 1px outset #aaaaaa;
+	border-right: 3px outset #aaaaaa;
+	border-spacing: 3px;
+}
+
+TABLE.NoteBlock TD.AreaIcon {
+       width: 45px;
+       vertical-align: top;
+       text-align: center;
+       font-weight: bold;
+}
+TABLE.NoteBlock TD.AreaContent {
+       vertical-align: top;
+       padding: 5px 8px 5px 8px;
+       background-color: #dddddd;
+}
+TABLE.Warning {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding: 0px;
+	width: 80%;
+	border-top: 1px outset #aaaaaa;
+	border-bottom: 3px outset #aaaaaa;
+	border-left: 1px outset #aaaaaa;
+	border-right: 3px outset #aaaaaa;
+	border-spacing: 3px;
+}
+
+TABLE.Warning TD.AreaIcon {
+       width: 45px;
+       vertical-align: top;
+       text-align: center;
+       font-weight: bold;
+}
+TABLE.Warning TD.AreaContent {
+       vertical-align: top;
+       padding: 5px 8px 5px 8px;
+       background-color: #dddddd;
+}
+TABLE.CustomNote {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding: 0px;
+}
+
+TABLE.CustomNote TD.AreaIcon {
+       vertical-align: top;
+       text-align: center;
+       font-weight: bold;
+}
+TABLE.CustomNote TD.AreaContent {
+	vertical-align: top;
+	font-family: arial;
+	font-size: 10pt;
+	padding-left: 0.5in;
+	padding-top: 2px;
+	padding-bottom: 5px;
+}
+TABLE.CustomNote TD.NodeType {
+	vertical-align: top;
+	padding: 5px 0px 5px 0px;
+	width: 25px;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-family: arial;
+	font-size: 10pt;
+}
+/*DIV.ParagraphType DIV.KeyPoint {
+	font-size: inherit;
+	font-weight: bold;
+	text-decoration: none;	
+	color: inherit;
+	background-color: #ffffff;
+	padding: 5px 30px 10px 0px;
+	border-top: #aaaaaa solid 1px;
+	border-bottom: #aaaaaa solid 1px;
+	margin-top: 20px;
+}
+DIV.ParagraphType DIV.KeyPoint SPAN {
+	font-size: inherit;
+	font-weight: bold;
+	text-decoration: none;	
+	color: blue;
+	background-color: inherit;
+}*/
+DIV.ParagraphType TABLE.Tip {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding: 0px;
+	width: 80%;
+	border-top: 1px outset #aaaaaa;
+	border-bottom: 3px outset #aaaaaa;
+	border-left: 1px outset #aaaaaa;
+	border-right: 3px outset #aaaaaa;
+	border-spacing: 3px;
+}
+
+DIV.ParagraphType TABLE.Tip TD.AreaIcon {
+       width: 45px;
+       vertical-align: top;
+       text-align: center;
+       font-weight: bold;
+}
+DIV.ParagraphType TABLE.Tip TD.AreaContent {
+       vertical-align: top;
+       padding: 5px 8px 5px 8px;
+       background-color: #dddddd;
+}
+
+DIV.ParagraphType DIV.InstructorNote {
+        border-top: 1px outset #aaaaaa;
+	border-bottom: 3px outset #aaaaaa;
+	border-left: 1px outset #aaaaaa;
+	border-right: 3px outset #aaaaaa;
+	margin:	3px 5px 3px 0px;
+	padding: 3px 2px 3px 6px;
+	float:left;
+	width: 110px;
+	font-size: 80%;
+	font-style: normal;	
+	color: inherit;
+	background-color: inherit;
+	position: relative;
+	margin-left: -135px;
+}
+DIV.ParagraphType DIV.InstructorNote IMG {
+	float: left;
+	position: relative;
+	margin-left: -15px;
+	margin-top: -10px;
+	padding: 0px;
+}
+/*DIV.ParagraphType DIV.InstructorNote SPAN {
+	font-size: inherit;
+	font-weight: bold;
+	text-decoration: none;	
+	color: yellow;
+	background-color: inherit;
+}*/
+DIV.ParagraphType DIV.ObjectiveNote {	
+        border-top: 1px outset #aaaaaa;
+	border-bottom: 3px outset #aaaaaa;
+	border-left: 1px outset #aaaaaa;
+	border-right: 3px outset #aaaaaa;
+	margin:	3px 5px 3px 0px;
+	padding: 3px 2px 3px 6px;
+	width: 110px;
+	font-size: 80%;
+	font-style: normal;	
+	color: inherit;
+	background-color: inherit;
+	position: absolute;
+	margin-left: -135px;
+}
+DIV.ParagraphType DIV.ObjectiveNote IMG {
+	float: left;
+	position: relative;
+	margin-left: -15px;
+	margin-top: -10px;
+	padding: 0px;
+}
+DIV.ParagraphType DIV.MarginNote {	
+        border-top: 1px outset #aaaaaa;
+	border-bottom: 3px outset #aaaaaa;
+	border-left: 1px outset #aaaaaa;
+	border-right: 3px outset #aaaaaa;
+	margin:	3px 5px 3px 0px;
+	padding: 3px 2px 3px 6px;
+	width: 110px;
+	font-size: 80%;
+	font-style: normal;	
+	color: inherit;
+	background-color: inherit;
+	position: absolute;
+	margin-left: -135px;
+}
+DIV.ParagraphType DIV.MarginNote IMG {
+	float: left;
+	position: relative;
+	margin-left: -15px;
+	margin-top: -10px;
+	padding: 0px;
+}
+/*DIV.ParagraphType DIV.ObjectiveNote SPAN {
+	font-size: 1.2em;
+	font-weight: bold;
+	text-decoration: none;	
+	color: inherit;
+}*/
+DIV.QuoteBlock {
+	font-style: italic;
+	text-decoration: none;
+	text-align: justify;
+	display: block;
+	color: inherit;
+	background-color: inherit;
+	padding: 5px 20px 5px 20px;
+}
+
+DIV.Code {
+	font-family: courier;
+	font-size: 12px;
+	background-color: #cccccc;
+	color: #666666;
+	margin: 15px 0px 15px 0px;
+	padding: 1px 0px 1px 0px;
+}
+DIV.Code UL.CodeLineNumbers LI {
+  	list-style-type: decimal;
+}
+DIV.Code UL.CodeNoNumbers LI {
+  	list-style-type: none;
+	list-style-image: none;
+}
+DIV.PopupBlock {
+	display: none; 
+	width: 350px; 
+	position:static;
+}
+
+/* @ParagraphType end ----------*/
+/*------------------------------*/
+
+
+/*----------------------------------*/
+/* @TitledBlockType begin ----------*/
+
+.TitledBlockType {
+	/*margin-left: inherit;*/
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding: 0px;
+	width: 100%;
+}
+.TitledBlockType_Title {
+       font-weight: bold;
+       text-align: left;
+}
+
+TABLE.TitledBlockType TD.CellIcon {
+       width: 60px;
+       vertical-align: top;
+}
+TABLE.TitledBlockType TD.CellText {
+       vertical-align: top;
+       padding: 5px 2px 5px 2px;
+}
+DIV.TextNoteBlock {
+       font-style: normal;
+       text-align: left;
+}
+DIV.TextCustomerOutcome {
+       font-weight: bold;
+       text-align: left;
+       padding: 2px 3px 0px 3px;
+       background-color: #f3e3bc;
+}
+DIV.TextWarning {
+       font-style: normal;
+       text-align: left;
+       padding: 2px 3px 0px 3px;
+       background-color: #fcd2c3;
+}
+DIV.TextCaution {
+       font-style: normal;
+       text-align: left;
+       padding: 2px 3px 0px 3px;
+       border: 1px solid #f47929;
+}
+DIV.TextCriticalPoint {
+       font-style: italic;
+       text-align: left;
+       padding: 2px 3px 0px 3px;
+       border: 1px solid red;
+}
+DIV.TextTroubleShootingBlock {
+       font-style: italic;
+       text-align: left;
+       padding: 2px 3px 0px 3px;
+}
+
+/*----------------------------------*/
+/* @InfoBlockType begin ----------*/
+
+.InfoBlockType {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding: 0px;
+	width: 80%;
+	border-top: 1px outset #aaaaaa;
+	border-bottom: 3px outset #aaaaaa;
+	border-left: 1px outset #aaaaaa;
+	border-right: 3px outset #aaaaaa;
+	border-spacing: 3px;
+}
+.InfoBlockType_Title {
+       font-weight: bold;
+       text-align: left;
+}
+
+TABLE.InfoBlockType TD.CellIcon {
+       width: 45px;
+       vertical-align: top;
+       text-align: center;
+       font-weight: bold;
+}
+TABLE.InfoBlockType TD.CellText {
+       vertical-align: top;
+       padding: 5px 8px 5px 8px;
+       background-color: #dddddd;
+}
+TABLE.InfoBlockType DIV.TextNoteBlock {
+       font-style: normal;
+       text-align: left;
+}
+TABLE.InfoBlockType DIV.TextCustomerOutcome {
+       font-weight: bold;
+       text-align: left;
+       border: none;
+       background-color: transparent;
+}
+TABLE.InfoBlockType DIV.TextWarning {
+       font-style: normal;
+       text-align: left;
+       border: none;
+       background-color: transparent;
+}
+TABLE.InfoBlockType DIV.TextCaution {
+       font-style: normal;
+       text-align: left;
+       border: none;
+       background-color: transparent;
+}
+TABLE.InfoBlockType DIV.TextCriticalPoint {
+       font-style: italic;
+       text-align: left;
+       border: none;
+       background-color: transparent;
+}
+TABLE.InfoBlockType DIV.TextTroubleShootingBlock {
+       font-style: italic;
+       text-align: left;
+       padding: 2px 3px 0px 3px;
+}
+
+
+/*---------------------------*/
+/* @ListType begin ----------*/
+
+.ListType {
+	font-size: inherit;
+	font-weight: inherit;
+	text-decoration: none;	
+	color: inherit;
+	background-color: inherit;
+	margin-left: inherit;
+/*	margin-top: 15px;*/
+/*	margin-bottom: 15px;*/
+	/*padding: 0px 0.22in;*/
+}
+.ListType DIV.ListPreamble {
+	font-size: inherit;
+	font-weight: inherit;
+	text-decoration: none;	
+	color: inherit;
+	background-color: inherit;
+}
+.ListType UL LI {
+	list-style-position: outside;
+}
+.ListType UL.Bullet {
+	list-style-image: none;
+	list-style-image: url(../Transforms/media/BulletGlassSmall.png);
+	padding-left: 0.5in;
+}
+.ListType UL.Numeric{
+	list-style-image: none;
+	list-style-type: decimal;
+	padding-left: 0.5in;
+}
+.ListType UL.LowercaseRoman {
+	list-style-image: none;
+	list-style-type: lower-roman;
+	padding-left: 0.5in;
+}
+.ListType UL.UppercaseRoman {
+	list-style-image: none;
+	list-style-type: upper-roman;
+	padding-left: 0.5in;
+}
+.ListType UL.LowercaseAlpha {
+	list-style-image: none;
+	list-style-type: lower-alpha;
+	padding-left: 0.5in;
+}
+.ListType UL.UppercaseAlpha {
+	list-style-image: none;
+	list-style-type: upper-alpha;
+	padding-left: 0.5in;
+}
+.ListType UL.Checkmark {
+/*	list-style-type: circle;*/
+	list-style-image: url(../Transforms/media/checkmark.gif);
+	padding-left: 0.5in;
+}
+.ListType UL.Arrow {
+/*	list-style-type: circle;*/
+	list-style-image: url(../Transforms/media/arrow.gif);
+	padding-left: 0.5in;
+}
+.ListType UL.Disk {
+	list-style-image: none;
+	list-style-type: disc;
+	padding-left: 0.5in;
+}
+.ListType UL.nDash {
+/*	list-style-type: circle;*/
+	list-style-image: url(../Transforms/media/n-dash.gif);
+	padding-left: 0.5in;
+}
+.ListType UL.mDash {
+/*	list-style-type: disc;*/
+	list-style-image: url(../Transforms/media/m-dash.gif);
+	padding-left: 0.5in;
+}
+.ListType UL.NoBullet {
+	list-style-type: none;
+	list-style-image: none;
+	padding-left: 0in;
+	display: inline;
+}
+.ListType UL.noMarker {
+	list-style-type: none;
+	list-style-image: none;
+	padding-left: 0.5in;
+}
+.ListType UL.Star {
+	list-style-image: url(../Transforms/media/star.gif);
+	padding-left: 0.5in;
+}
+.ListType UL.NoSymbol {
+	list-style-image: url(../Transforms/media/NoSymbol.gif);
+	padding-left: 0.5in;
+}
+/* @ListType end ----------*/
+/*-------------------------*/
+
+
+/*----------------------------*/
+/* @TableType begin ----------*/
+
+DIV.TableType {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	margin-left: auto;
+	margin-right: auto;
+}
+DIV.TableType_Title {
+	font-size: 10pt;
+	font-weight: bold;
+	text-align: left;
+	background-color: inherit;
+	padding: 10px 5px 10px 5px;
+}
+TABLE.TableType {
+	border-collapse: collapse;
+	border-spacing: 0px;
+	border: 1px solid #000000;
+	background-color: inherit;
+	width: 100%;
+}
+TABLE.TableType TR.TableRow {
+	background-color: inherit;
+}
+TABLE.TableType THEAD {
+	font-size: 11pt;
+	text-align: left;
+	background-color: #dddddd;
+	border: 1px solid #000000;
+	padding: 5px 5px 5px 5px;
+	font-weight: bold;
+}
+TR.TableRow TD {
+	font-size: 10pt;
+	text-align: left;
+	border: 1px solid #000000;
+	padding: 5px 10px 5px 10px;
+}
+TD.TableCell {
+	font-size: 10pt;
+	text-align: left;
+	background-color: inherit;
+	border: 1px solid #000000;
+	padding: 5px 10px 5px 10px;
+}
+TD.TableHeaderCell {
+	font-size: 10pt;
+	text-align: left;
+	background-color: #dddddd;
+	border: 1px solid #000000;
+	padding: 5px 10px 5px 10px;
+	font-weight: bold;
+}
+TABLE.TableType TFOOT TD {
+	font-size: inherit;
+	text-align: left;
+	background-color: #dddddd;
+	border-top: 2px solid #999999;
+	padding: 5px 10px 5px 10px;
+	font-weight: bold;
+}
+DIV.TableCaption {
+	color: blue;
+	width: 100%;
+	text-align: center;
+	padding: 5px 0px 5px 0px;
+}
+
+/* @TableType end ---------*/
+/*-------------------------*/
+
+/*-----------------------------*/
+/* @FigureType begin ----------*/
+
+DIV.FigureType {
+	border: none;
+	text-align: center;
+	padding: 5px 0px 5px 0px;
+}
+DIV.Caption {
+        margin-top: 3px;
+	font-style: italic;
+	width: inherit;
+	text-align: center;
+}
+DIV.TextOverlay {
+	position: relative;
+	text-align: left;
+}
+DIV.FigureType DIV.WrapLeft {
+    float: left;
+}
+
+/* @FigureType end ----------*/
+/*---------------------------*/
+
+
+/*------------------------------*/
+/* GlossaryItem begin ----------*/
+
+DIV.Glossary {
+	text-align: justify;
+	color: #666666;
+	margin-right:35px;
+}
+DIV.GlossaryTitle {
+	font-weight: bold;
+	font-size: 16px;
+	padding: 15px 0px 15px 0px;
+	color: #010170;
+}
+A.GlossaryABCLink {
+	font-weight: bold;
+	font-size: 14px;
+	color: #1696BD;
+}
+DIV.GlossaryItem {
+	font-size: 12px;
+	padding: 5px 0px 10px 0px;
+	text-align: justify;
+	color: #000000;
+}
+DIV.GlossaryItems {
+	width: 100%;
+	overflow-y: scroll;
+}
+DIV.GlossaryItem DIV.GlossaryTerm {
+	font-weight: bold;
+	font-size: 14px;
+	color: #1696BD;
+}
+DIV.GlossaryItem DIV.GlossaryDef {
+	font-size: 11px;
+	display: block;
+	padding: 0px 0px 4px 0px;
+}
+DIV.ParagraphType DIV.GlossaryItem {
+        border-top: 1px outset #aaaaaa;
+	border-bottom: 3px outset #aaaaaa;
+	border-left: 1px outset #aaaaaa;
+	border-right: 3px outset #aaaaaa;
+	margin:	3px 5px 3px 0px;
+	padding: 3px 2px 3px 6px;
+	width: 110px;
+	font-size: 80%;
+	font-style: normal;
+	color: #000031;
+	background-color: inherit;
+	position: absolute;
+	margin-left: -135px;
+}
+DIV.ParagraphType DIV.GlossaryItem DIV.GlossaryTerm {
+	font-size: 100%;
+}
+DIV.ParagraphType DIV.GlossaryItem DIV.GlossaryDef {
+	padding: 0px 0px 0px 7px;
+	font-size: 100%;
+	text-align: left;
+}
+DIV.GlossaryItemPronoun {
+	font-weight: normal;
+	font-size: 11px;
+	font-style: italic;	
+	padding: 0px 0px 0px 20px;
+}
+.GlossaryDef .ListItemPara TABLE {
+	font-size: 11px;
+}
+
+.DirectiveGlossaryElementTable .GlossaryDef .ListItemPara TABLE {
+	font-size: 13px;
+}
+
+/* GlossaryItem end ----------*/
+/*----------------------------*/
+
+/*------------------------------*/
+/* PhoneBookItem begin ----------*/
+
+DIV.PhoneBook {
+	text-align: justify;
+	color: #666666;
+}
+DIV.PhoneBookTitle {
+	font-weight: bold;
+	font-size: 16px;
+	padding: 15px 0px 15px 0px;
+	color: #010170;
+}
+A.PhoneBookABCLink {
+	font-weight: bold;
+	font-size: 14px;
+	color: #1696BD;
+}
+DIV.PhoneBookItem {
+	font-size: 12px;
+	padding: 5px 0px 10px 0px;
+	text-align: justify;
+	color: #000000;
+}
+DIV.PhoneBookItems {
+	width: 100%;
+	overflow-y: scroll;
+}
+DIV.PhoneBookItem DIV.PhoneBookContact {
+	font-weight: bold;
+	font-size: 14px;
+	color: #1696BD;
+}
+DIV.PhoneBookItem DIV.PhoneBookDef {
+	font-size: 11px;
+	display: block;
+	padding: 0px 0px 3px 0px;
+}
+DIV.ParagraphType DIV.PhoneBookItem {
+        border-top: 1px outset #aaaaaa;
+	border-bottom: 3px outset #aaaaaa;
+	border-left: 1px outset #aaaaaa;
+	border-right: 3px outset #aaaaaa;
+	margin:	3px 5px 3px 0px;
+	padding: 3px 2px 3px 6px;
+	width: 110px;
+	font-size: 80%;
+	font-style: normal;
+	color: #000031;
+	background-color: inherit;
+	position: absolute;
+	margin-left: -135px;
+}
+DIV.ParagraphType DIV.PhoneBookItem DIV.PhoneBookContact {
+	font-size: 100%;
+}
+DIV.ParagraphType DIV.PhoneBookItem DIV.PhoneBookDef {
+	padding: 0px 0px 0px 7px;
+	font-size: 100%;
+	text-align: left;
+}
+DIV.PhoneBookItemPronoun {
+	font-weight: normal;
+	font-size: 11px;
+	font-style: italic;	
+	padding: 0px 0px 0px 20px;
+}
+
+DIV.PhoneBookItem LI {
+	margin-left: -25px;
+}
+
+DIV.PhoneBookItems LI {
+	margin-left: -15px;
+}
+
+/* PhoneBookItem end ----------*/
+/*----------------------------*/
+
+/*---------------------------------*/
+/* MediaObjectType begin ----------*/
+
+DIV.MediaObjectType {
+	border: none;
+	padding: 5px 10px 5px 10px;
+}
+
+/* MediaObjectType end ----------*/
+/*-------------------------------*/
+
+
+/*-------------------------------------------*/
+/* @EducationalObjectiveType begin ----------*/
+
+
+DIV.EducationalObjectiveType {
+	padding: 0px 10px 5px 0px;
+}
+DIV.ObjectiveIntro {
+	font-size: inherit;
+	font-weight: inherit;
+	text-decoration: none;	
+	color: inherit;
+	background-color: inherit;
+	padding: 0px 0px 10px 0px;
+	margin-left: -25px;
+}
+DIV.StatementList {
+	font-size: inherit;
+	font-weight: inherit;
+	text-decoration: none;	
+	color: inherit;
+	background-color: inherit;
+}
+DIV.StatementList UL LI {
+	list-style-position: outside;
+}
+UL.StatementList {
+	list-style-type: disc;
+	list-style-image: url(../Transforms/media/BulletGlassSmall.png);
+}
+
+
+/* @EducationalObjectiveType end ----------*/
+/*-----------------------------------------*/
+
+
+/*------------------------------------*/
+/* StepGroup begin ----------*/
+
+DIV.StepGroup {
+	padding: 0px 0px 10px 0px;
+	margin-top: 10px;
+	clear: both;
+}
+DIV.Title_StepGroup {
+	font-size: inherit;
+	font-weight: bold;
+	font-style: inherit;
+	color: inherit;
+	background-color: inherit;
+	margin-top: 20px 0px 0px 0px;
+}
+DIV.ClosedStep {
+    background: #8A9DAC url('../Transforms/media/ClosedStep.png') no-repeat scroll center;
+    cursor: pointer;
+    font-weight: bold;
+    font-style: italic;
+    font-family: arial;
+    font-size: 10pt;
+    margin-left: 30px;
+    padding-left: 10px;
+    padding-top: 5px;
+    height: 24px;
+}
+TABLE.StepActionTable {
+	padding-top: 0px;
+	width: 100%;
+}
+TABLE.StepActionTable TD.Separator {
+	vertical-align: top;
+	font-size: inherit;
+	color: #000000;
+	font-weight: bold;
+	font-style: italic;
+	border-bottom: 2px solid #000000;
+}
+TD.SeparatorSubStep {
+	border-bottom: 1px solid  #999999;
+}
+TABLE.StepActionTable TD {
+	padding-top: 5px;
+}
+TABLE.StepActionTable TD.None {
+                padding: 0px;
+                margin:  0px;
+                width: 21px;
+}
+TABLE.StepActionTable TD.Heading {
+	font-size: inherit;
+	color: inherit;
+	font-weight: bold;
+	width: 100px;
+	vertical-align: top;
+	padding-left: 20px;
+}
+TABLE.StepActionTable TD.Text {
+               width: 80%;            	
+}
+TABLE.StepActionTable TD.TextNone {
+               padding: 0px;
+               margin:  0px;
+}
+TABLE.StepActionTable TR.UserAction {
+	font-size: inherit;
+	color: inherit;
+}
+TABLE.SystemResponse {
+	border:none; 
+	border-collapse: collapse;
+}
+TABLE.SystemResponse TD {
+	padding:0px;
+}
+DIV.SystemResponseIcon {
+	padding: 0px 2px 0px 2px;
+}
+TABLE.StepActionTable TD.SubstepTable {
+	padding-left: 30px;
+}
+TABLE.StepActionTable TD.StepCell {
+	padding-left: 20px;
+}
+TABLE.StepActionTable TD.SubstepCell {
+	padding-left: 20px;
+}
+TABLE.StepActionTable TR.StepNote {
+	font-style: italic;
+}
+TABLE.StepActionTable TR.StepWarning {
+	font-style: italic;
+}
+TR.UserAction DIV.Example {
+	text-align: left;
+}
+TR.SystemResponse DIV.Example {
+	text-align: left;
+}
+TEXTAREA.EntryField {
+	border: 2px solid #316AC5;
+}
+DIV.CharLimit{
+	text-align: right;
+	padding-top: 7px;
+	padding-right: 30px;
+}
+/* StepGroup end ----------*/
+/*----------------------------------*/
+
+DIV.DocWriter {
+	padding-left: 10px;
+}
+
+DIV.DocWriter DIV.Instructions {
+	padding: 0px 10px 10px 10px;
+}
+
+DIV.Instructions {
+	margin-top: 8px;
+}
+.DocWriterButton  {
+	background-color:#316AC5; 
+	border:3px outset #ACC5DA; 
+	height:25px; 
+	margin-right:10px;
+	width: 130px;
+	color: #ffffff;
+}
+.DocWriterButton[disabled]  {
+	background-color:#B6B6A8; 
+	border:3px outset #A6A6A6; 
+	height:25px; 
+	margin-right:10px;
+	width: 130px;
+	color: #ffffff;
+}
+/*-----------------------------------*/
+/* WebMultipleChoice begin ----------*/
+
+
+/* -- common for all question types */
+SPAN.OptionIcon {
+	width: 29px;
+}
+SPAN.FeedbackIcon {
+	width: 29px;
+	display: none;
+	visibility: hidden;
+}
+IMG.FeedbackIcon {
+	display: none;
+	visibility: hidden;
+	vertical-align: middle;
+	padding: 2px 5px 0px 10px;
+}
+/* -- end common */
+
+
+DIV.WebMultipleChoice {
+	/*border-left: 1px solid #999999;
+	border-bottom: 1px solid #999999;*/
+	width: 590px;
+}
+
+DIV.WebMultipleChoice OL {
+	padding-bottom: 20px;
+	list-style-type: none;
+}
+DIV.WebMultipleChoice OL LI {
+	margin-left: -40px;
+}
+DIV.WebMultipleChoice DIV.ListType LI {
+	margin-left: 0px;
+}
+DIV.WebMultipleChoice DIV.QuestionStem {
+	padding: 8px 0px 8px 0px;
+	min-height: 35px; 
+	margin-bottom: 1px;
+	color: #ffffff;
+	background: #18386b url(../../media/Core/question-stem_background.png) left top no-repeat;
+}
+DIV.WebMultipleChoice DIV.QuestionStem DIV.QuestionStemInnerWrapper {
+        margin: 0px 5px 0px 45px;
+}
+DIV.WebMultipleChoice DIV.QuestionStem DIV.QuestionStemInnerWrapper DIV {
+	margin-left: 0px;
+}
+DIV.WebMultipleChoice DIV.Option {
+	padding: 0px 0px 0px 0px;
+	border-top: 1px solid #ffffff;
+}
+DIV.WebMultipleChoice DIV.Option DIV.Light {
+	clear: both;
+	background-color: #dedede;
+	min-height: 45px;
+}
+DIV.WebMultipleChoice DIV.Option DIV.Dark {
+	clear: both;
+        background-color: #d6d6d6;
+	min-height: 45px;
+}
+DIV.WebMultipleChoice DIV.Option DIV.Col1 {
+	float: left;
+	width: 75px;
+	vertical-align: middle;
+}
+DIV.WebMultipleChoice DIV.Option DIV.Col1 DIV.Col1InnerWrapper {
+       margin: 10px 5px 0px 5px;
+}
+DIV.WebMultipleChoice DIV.Option DIV.Col2 {
+        margin-left: 80px;
+	width: 510px;
+	color: #000031;
+}
+DIV.WebMultipleChoice DIV.Option DIV.Col2 DIV.Col2Light {
+	background-color: #efefef;
+	min-height: 45px;
+}
+DIV.WebMultipleChoice DIV.Option DIV.Col2 DIV.Col2Dark {
+        background-color: #e7e7e7;
+	min-height: 45px;
+}
+DIV.WebMultipleChoice DIV.Option DIV.Col2 DIV.Col2InnerWrapper {
+        padding: 10px 5px 5px 8px;
+}
+DIV.WebMultipleChoice DIV.Option INPUT {
+	vertical-align: top;
+	margin-right: 15px;
+}
+DIV.WebMultipleChoice DIV.Option DIV.Feedback {
+	font-style: italic;
+	padding: 0px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+	width: 380px;
+}
+DIV.WebMultipleChoice DIV.Option DIV.CorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #18386b;
+	background-color: inherit;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+/*	float: left;*/
+}
+DIV.WebMultipleChoice DIV.Option DIV.IncorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #9c0031;
+	background-color: inherit;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+/*	clear: both; */
+}
+DIV.WebMultipleChoice DIV.Option DIV.ThisIsCorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #9fc0f2;
+	background-color: inherit;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+/*	clear: both; */
+}
+
+DIV.WebMultipleChoice DIV.QuestionFeedback {
+	clear: both;
+	padding: 15px 0px 0px 0px;
+}
+DIV.WebMultipleChoice DIV.Option DIV.Feedback {
+	font-style: italic;
+	font-weight: bold;
+	padding: 0px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+}
+DIV.WebMultipleChoice DIV.PositiveFeedback {
+	font-style: italic;
+	font-weight: bold;
+	color: #18386b;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none; 
+	clear: both;
+}
+DIV.WebMultipleChoice DIV.NegativeFeedback {
+	font-style: italic;
+	font-weight: bold;
+	color: #9c0031;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none; 
+	clear: both;
+}
+DIV.WebMultipleChoice DIV.Advice{
+	font-style: italic;
+	font-weight: bold;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none; 
+	clear: both;
+}
+DIV.WebMultipleChoice DIV.Advice DIV{
+	margin-left: 10px;
+}
+DIV.WebMultipleChoice DIV.QuestionFeedback DIV.Col1 {
+	float: left;
+	width: 29px;
+}
+DIV.WebMultipleChoice DIV.QuestionFeedback DIV.Col2 {
+	float: left;
+}
+DIV.WebMultipleChoice DIV.QuestionFeedback DIV.IncorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #9c0031;
+	padding: 0px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+}
+
+DIV.WebMultipleChoice DIV.Hint {
+	font-style: italic;
+	padding: 10px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+}
+
+DIV.WebMultipleChoice DIV.Hint SPAN {
+	font-weight: bold;
+}
+
+DIV.SubmitWmc {
+	padding: 20px 0px 10px 30px;
+	font-weight: bold;
+	clear: both;
+}
+DIV.SubmitWmc INPUT {
+/*	padding: 2px 10px 2px 10px;
+	background-color: #9c0031;
+	background-color: #33bced; */
+	color: #ffffff;
+	border: none;
+	height: 28px;
+	width: 100px;
+	background: url(../../media/Core/submit_background.png) left top no-repeat;
+}
+DIV.SubmitWmc SPAN {
+	padding-left: 8px;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+/* WebMultipleChoice end ----------*/
+/*---------------------------------*/
+
+
+/*--------------------------------*/
+/* Matrix begin ----------*/
+
+DIV.Matrix {
+	width: 600px;
+}
+
+DIV.Matrix OL {
+	padding-bottom: 20px;
+	list-style-type: none;
+}
+DIV.Matrix OL LI {
+	margin-left: -40px;
+}
+DIV.Matrix DIV.ListType LI {
+	margin-left: 0px;
+}
+DIV.Matrix DIV.QuestionStem {
+	padding: 8px 0px 8px 0px;
+	min-height: 35px; 
+	margin-bottom: 1px;
+	color: #ffffff;
+	background: #18386b url(../../media/Core/question-stem_background.png) left top no-repeat;
+}
+DIV.Matrix DIV.QuestionStem DIV.QuestionStemInnerWrapper {
+        margin: 0px 5px 0px 45px;
+}
+DIV.Matrix DIV.QuestionStem DIV.QuestionStemInnerWrapper DIV {
+	margin-left: 0px;
+
+}
+DIV.Matrix DIV.Headers{
+	padding: 0px 0px 0px 0px;
+	text-align: center;
+}
+DIV.Matrix DIV.Headers DIV.Usual {
+	clear: both;
+}
+DIV.Matrix DIV.Headers DIV.Col1 {
+	float: left;
+	width: 325px;
+	vertical-align: middle;
+}
+DIV.Matrix DIV.Option {
+	padding: 0px 0px 0px 0px;
+	float:left;
+	width:100%;
+	border-top: 1px solid #ffffff;
+	vertical-align: middle;
+}
+DIV.Matrix DIV.Option DIV.Light {
+	float:left;
+	width:100%;
+	background-color: #dedede;
+	vertical-align: middle;
+}
+DIV.Matrix DIV.Option DIV.Dark {
+	width:100%;
+	float:left;
+    background-color: #d6d6d6;
+	vertical-align: middle;
+}
+DIV.Matrix DIV.Option DIV.Col1 {
+	float: left;
+	width: 29px;
+	vertical-align: middle;
+}
+DIV.Matrix DIV.Option DIV.Div2InnerWrapper {
+	vertical-align: middle;
+	height:100%; 
+}
+DIV.Matrix DIV.Option DIV.Div1InnerWrapper{
+	width:296px; 
+	height:100%;
+	float:left; 
+	text-align:left; 
+}
+DIV.Matrix DIV.Option DIV.Col2 {
+    margin-left: 80px;
+	width: 510px;
+	color: #000031;
+}
+DIV.Matrix DIV.Option DIV.Col2 DIV.Col2Light {
+	background-color: #efefef;
+}
+DIV.Matrix DIV.Option DIV.Col2 DIV.Col2Dark {
+    background-color: #e7e7e7;
+}
+DIV.Matrix DIV.Option INPUT {
+	text-align: center;
+	vertical-align: middle;
+}
+DIV.Matrix DIV.Option DIV.Feedback {
+	font-style: italic;
+	font-weight: bold;
+	padding: 0px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+}
+DIV.Matrix DIV.CorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #18386b;
+	background-color: inherit;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+/*	float: left;*/
+}
+DIV.Matrix DIV.NotQuite {
+	font-style: italic;
+	font-weight: bold;
+	color: #3399FF;
+	background-color: inherit;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+}
+DIV.Matrix DIV.IncorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #9c0031;
+	background-color: inherit;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+/*	clear: both; */
+}
+DIV.Matrix DIV.ThisIsCorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #9fc0f2;
+	background-color: inherit;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+/*	clear: both; */
+}
+
+DIV.Matrix DIV.QuestionFeedback {
+	clear: both;
+	padding: 15px 0px 0px 0px;
+}
+DIV.Matrix DIV.PositiveFeedback {
+	font-style: italic;
+	font-weight: bold;
+	color: #18386b;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none; 
+	clear: both;
+}
+DIV.Matrix DIV.NegativeFeedback {
+	font-style: italic;
+	font-weight: bold;
+	color: #9c0031;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none; 
+	clear: both;
+}
+DIV.Matrix DIV.QuestionFeedback DIV.Col1 {
+	float: left;
+	width: 29px;
+}
+DIV.Matrix DIV.QuestionFeedback DIV.Col2 {
+	float: left;
+}
+DIV.Matrix DIV.QuestionFeedback DIV.IncorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #9c0031;
+	padding: 0px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+}
+
+DIV.Matrix DIV.Hint {
+	font-style: italic;
+	padding: 10px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+}
+
+DIV.Matrix DIV.Hint SPAN {
+	font-weight: bold;
+}
+
+DIV.SubmitMatrix {
+	padding: 20px 0px 10px 30px;
+	font-weight: bold;
+	clear: both;
+}
+DIV.SubmitMatrix INPUT {
+/*	padding: 2px 10px 2px 10px;
+	background-color: #9c0031;
+	background-color: #33bced; */
+	color: #ffffff;
+	border: none;
+	height: 28px;
+	width: 100px;
+	background: url(../../media/Core/submit_background.png) left top no-repeat;
+}
+DIV.SubmitMatrix SPAN {
+	padding-left: 8px;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+/* Matrix end ----------*/
+/*---------------------------------*/
+
+/*--------------------------------*/
+/* BranchingSIM begin ----------*/
+
+DIV.WebBranchingSim {
+    width: 380px;
+}
+
+DIV.BranchingOutcome {
+	width: 380px;
+	border-top: 1px solid #ffffff;
+}
+
+DIV.BranchingOutcome DIV.Header {
+	padding: 8px 8px 8px 8px;
+	min-height: 25px; 
+	margin-bottom: 1px;
+	color: #ffffff;
+	background-color: #18386b;
+	border: 1px outset black;
+}
+
+DIV.BranchingOutcome DIV.Content {
+	padding: 8px 8px 8px 8px;
+	border: 1px solid #999999;
+	background-color: #E3E3E3;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+	height: 210px;
+	overflow: hidden;
+}
+
+TD.BranchingTDTitle {
+            background-color: #18386B;
+}
+
+DIV.BranchingTitle {
+            padding-left: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+}
+
+DIV.BranchingStemPlaceholder {
+        padding: 8px 8px 8px 8px;
+        vertical-align: top;
+}
+
+TD.BranchingQuestions {
+        padding-top: 0px;
+        margin-top: 0px;
+        vertical-align: top;
+}
+
+DIV.BranchingQuestionStem {
+    display: none;
+    color: #18386B;
+}
+
+DIV.BranchingQuestionHeader {
+    width: 100%;
+    padding: 8px 0px 8px 0px;
+    min-height: 15px;
+    border-bottom: 1px solid #ffffff;
+    border-top: 1px solid #ffffff;
+    color: #ffffff;
+    background-color: #18386b;
+}
+
+DIV.BranchingQuestionStemInnerWrapper {
+        margin: 0px 5px 0px 45px;
+}
+
+DIV.BranchingInfoText {
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+TD.BranchingFeedback {
+    background: transparent url(../../media/Core/BranchingSimFeedbackBackground.png) no-repeat scroll left top;
+    vertical-align: bottom;
+}
+
+DIV.BranchingFeedbackText {
+    padding: 8px 8px 8px 8px;
+    height: 100px;
+}
+
+TABLE.BranchingSim {
+    border: 0px;
+}
+
+
+DIV.BranchingSimDiv {
+    border-color: #B2B2C1; 
+    border: 2px; 
+    width: 799px; 
+    display: block;
+    position: relative;
+    border-style: inset;    
+}
+
+
+/*DIV.WebMultipleChoice DIV.Option {
+	padding: 0px 0px 0px 0px;
+	border-top: 1px solid #ffffff;
+}*/
+
+DIV.BranchingSimOptionLight {
+	clear: both;
+	background-color: #EFEFEF;
+	min-height: 45px;	
+	border: 2px;
+	display: block;
+               position: relative;
+               border-color: #dedede;
+               border-style: outset;
+               margin-top: 3px;
+}
+
+DIV.BranchingSimOptionDark {
+	clear: both;
+               background-color: #E7E7E7;
+	min-height: 45px;	
+	border: 2px;
+	display: block;
+               position: relative;
+               border-color: #d6d6d6;
+               border-style: outset;
+               margin-top: 3px;
+}
+
+DIV.BranchingStemPlaceholder IMG {
+    max-width: 370px;
+}
+
+DIV.BranchingOutcomeContent IMG {
+    max-width: 370px;
+	margin-left: -10px;
+	margin-top: -10px;
+}
+
+DIV.BranchingOutcome IMG {
+    max-width: 330px; 
+    max-height: 150px; 
+    margin-top: -20px;
+}
+
+DIV.BranchingSimDiv ul li{
+	margin-left:20px;
+}
+
+#TB_window ul li{
+	margin-left:20px;
+}
+/* BranchingSIM end ----------*/
+/*---------------------------------*/
+
+DIV.ContentCover {
+	background-color: #000000;
+    color: #FFFFFF;
+	left:0px; top: 0px; height: 100%; width: 100%;
+	filter:alpha(opacity=75);
+	opacity:0.75;
+    position:fixed;
+	z-index: 10000;
+}
+DIV.ContentCover DIV.LoadingText {
+    font-size: 28px;
+    padding-top: 25%;
+    text-align: center;
+}
+
+
+
+
+/*--------------------------------*/
+/* ImageMapAssessment  begin ----------*/
+
+DIV.ImageMapAssessment  {
+	/*border-left: 1px solid #999999;
+	border-bottom: 1px solid #999999;*/
+	
+}
+
+DIV.ImageMapAssessment  OL {
+	padding-bottom: 20px;
+	list-style-type: none;
+}
+DIV.ImageMapAssessment  OL LI {
+	margin-left: -40px;
+}
+DIV.ImageMapAssessment  DIV.ListType LI {
+	margin-left: 0px;
+}
+DIV.ImageMapAssessment  DIV.QuestionStem {
+	padding: 8px 0px 8px 0px;
+	min-height: 35px; 
+	margin-bottom: 1px;
+	color: #ffffff;
+	background: #18386b url(../../media/Core/question-stem_background.png) left top no-repeat;
+}
+DIV.ImageMapAssessment  DIV.QuestionStem DIV.QuestionStemInnerWrapper {
+        margin: 0px 5px 0px 45px;
+}
+DIV.ImageMapAssessment  DIV.QuestionStem DIV.QuestionStemInnerWrapper DIV {
+	margin-left: 0px;
+}
+DIV.ImageMapAssessment  DIV.CorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #18386b;
+	background-color: inherit;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+/*	float: left;*/
+}
+DIV.ImageMapAssessment  DIV.IncorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #9c0031;
+	background-color: inherit;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+/*	clear: both; */
+}
+DIV.ImageMapAssessment  DIV.ThisIsCorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #9fc0f2;
+	background-color: inherit;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+/*	clear: both; */
+}
+
+DIV.ImageMapAssessment  DIV.QuestionFeedback {
+	clear: both;
+	padding: 15px 0px 0px 0px;
+}
+DIV.ImageMapAssessment  DIV.PositiveFeedback {
+	font-style: italic;
+	font-weight: bold;
+	color: #18386b;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none; 
+	clear: both;
+}
+DIV.ImageMapAssessment  DIV.NegativeFeedback {
+	font-style: italic;
+	font-weight: bold;
+	color: #9c0031;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none; 
+	clear: both;
+}
+DIV.ImageMapAssessment  DIV.QuestionFeedback DIV.Col1 {
+	float: left;
+	width: 29px;
+}
+DIV.ImageMapAssessment  DIV.QuestionFeedback DIV.Col2 {
+	float: left;
+}
+DIV.ImageMapAssessment  DIV.QuestionFeedback DIV.IncorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #9c0031;
+	padding: 0px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+}
+
+DIV.ImageMapAssessment  DIV.Hint {
+	font-style: italic;
+	padding: 10px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+}
+
+DIV.ImageMapAssessment  DIV.Hint SPAN {
+	font-weight: bold;
+}
+
+DIV.SubmitImageMapAssessment  {
+	padding: 10px 0px 10px 30px;
+	font-weight: bold;
+	clear: both;
+}
+DIV.SubmitImageMapAssessment  INPUT {
+/*	padding: 2px 10px 2px 10px;
+	background-color: #9c0031;
+	background-color: #33bced; */
+	color: #ffffff;
+	border: none;
+	height: 28px;
+	width: 100px;
+	background: url(../../media/Core/submit_background.png) left top no-repeat;
+}
+DIV.SubmitImageMapAssessment  SPAN {
+	padding-left: 8px;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+/* ImageMapAssessment  end ----------*/
+/*---------------------------------*/
+
+
+/*--------------------------------*/
+/* ImageMapQuiz  begin ----------*/
+
+
+DIV.ImageMapQuiz  {
+	/*border-left: 1px solid #999999;
+	border-bottom: 1px solid #999999;*/
+}
+
+DIV.IMQPopup{
+  	background-color: #000000;
+	color: #FFFFFF;
+	filter:alpha(opacity=50);
+	opacity:0.5;
+    display:none;
+    left:0px; top: 0px; height: 100%; width: 100%;
+    position:fixed;
+	z-index: 10;
+}
+
+
+DIV.ImageMapQuiz  OL {
+	padding-bottom: 20px;
+	list-style-type: none;
+}
+DIV.ImageMapQuiz  OL LI {
+	margin-left: -40px;
+}
+DIV.ImageMapQuiz  DIV.ListType LI {
+	margin-left: 0px;
+}
+DIV.ImageMapQuiz  DIV.QuestionStem {
+	padding: 8px 0px 8px 0px;
+	min-height: 35px; 
+	margin-bottom: 1px;
+	color: #ffffff;
+	background: #18386b url(../../media/Core/question-stem_background.png) left top no-repeat;
+}
+DIV.ImageMapQuiz  DIV.QuestionStem DIV.QuestionStemInnerWrapper {
+        margin: 0px 5px 0px 45px;
+}
+DIV.ImageMapQuiz  DIV.QuestionStem DIV.QuestionStemInnerWrapper DIV {
+	margin-left: 0px;
+}
+DIV.ImageMapQuiz  DIV.CorrResponse {
+	font-family: Arial;
+    font-size: 11pt;
+	color: #0fc800;
+	font-style: italic;
+	font-weight: bold;
+	background-color: inherit;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+/*	float: left;*/
+}
+DIV.ImageMapQuiz  DIV.IncorrResponse {
+	font-family: Arial;
+    font-size: 11pt;
+	color: #d6202a;
+	font-style: italic;
+	font-weight: bold;
+	background-color: inherit;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+/*	clear: both; */
+}
+DIV.ImageMapQuiz  DIV.ThisIsCorrResponse {
+	font-family: Arial;
+    font-size: 11pt;
+	font-style: italic;
+	font-weight: bold;
+	color: #0fc800;
+	background-color: inherit;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+/*	clear: both; */
+}
+
+DIV.ImageMapQuiz  DIV.QuestionFeedback {
+	clear: both;
+	padding: 15px 0px 0px 0px;
+}
+DIV.ImageMapQuiz  DIV.PositiveFeedback {
+	font-family: Arial;
+    font-size: 11pt;
+	color: #0fc800;
+	font-style: italic;
+	font-weight: bold;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none; 
+	clear: both;
+}
+DIV.ImageMapQuiz  DIV.NegativeFeedback {
+	font-family: Arial;
+    font-size: 11pt;
+	color: #d6202a;
+	font-style: italic;
+	font-weight: bold;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none; 
+	clear: both;
+}
+DIV.ImageMapQuiz  DIV.QuestionFeedback DIV.Col1 {
+	float: left;
+	width: 29px;
+}
+DIV.ImageMapQuiz  DIV.QuestionFeedback DIV.Col2 {
+	float: left;
+}
+DIV.ImageMapQuiz  DIV.QuestionFeedback DIV.IncorrResponse {
+	font-family: Arial;
+    font-size: 11pt;
+	color: #d6202a;
+	font-style: italic;
+	font-weight: bold;
+	padding: 0px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+}
+
+DIV.ImageMapQuiz  DIV.Hint {
+	font-style: italic;
+	padding: 10px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+}
+
+DIV.ImageMapQuiz  DIV.Hint SPAN {
+	font-weight: bold;
+}
+
+DIV.SubmitImageMapQuiz  {
+	padding: 10px 0px 10px 30px;
+	font-weight: bold;
+	clear: both;
+}
+DIV.SubmitImageMapQuiz  INPUT {
+/*	padding: 2px 10px 2px 10px;
+	background-color: #9c0031;
+	background-color: #33bced; */
+	color: #ffffff;
+	border: none;
+	height: 28px;
+	width: 100px;
+	background: url(../../media/Core/submit_background.png) left top no-repeat;
+}
+DIV.SubmitImageMapQuiz  SPAN {
+	padding-left: 8px;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+/* ImageMapQuiz  end ----------*/
+/*---------------------------------*/
+
+/*--------------------------------*/
+/* Gameshow begin ----------*/
+
+
+DIV.Gameshow  {
+	/*border-left: 1px solid #999999;
+	border-bottom: 1px solid #999999;*/
+}
+
+DIV.GSPopup{
+	background-color: #000000;
+	color: #FFFFFF;
+	filter:alpha(opacity=50);
+	opacity:0.5;
+    display:none;
+    left:0px; top: 0px; height: 100%; width: 100%;
+    position:fixed;
+	z-index: 10;
+}
+
+
+DIV.Gameshow  OL {
+	padding-bottom: 20px;
+	list-style-type: none;
+}
+DIV.Gameshow  OL LI {
+	margin-left: -40px;
+}
+DIV.Gameshow  DIV.ListType LI {
+	margin-left: 0px;
+}
+DIV.Gameshow  DIV.QuestionStem {
+	padding: 8px 0px 8px 0px;
+	min-height: 35px; 
+	margin-bottom: 1px;
+	color: #ffffff;
+	background: #18386b url(../../media/Core/question-stem_background.png) left top no-repeat;
+}
+DIV.Gameshow  DIV.QuestionStem DIV.QuestionStemInnerWrapper {
+        margin: 0px 5px 0px 45px;
+}
+DIV.Gameshow  DIV.QuestionStem DIV.QuestionStemInnerWrapper DIV {
+	margin-left: 0px;
+}
+DIV.Gameshow  DIV.CorrResponse {
+	font-family: Arial;
+    font-size: 11pt;
+	color: #0fc800;
+	font-style: italic;
+	font-weight: bold;
+	background-color: inherit;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+/*	float: left;*/
+}
+DIV.Gameshow  DIV.IncorrResponse {
+	font-family: Arial;
+    font-size: 11pt;
+	color: #9c0031;
+	font-style: italic;
+	font-weight: bold;
+	background-color: inherit;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+/*	clear: both; */
+}
+DIV.Gameshow  DIV.ThisIsCorrResponse {
+	font-family: Arial;
+    font-size: 11pt;
+	font-style: italic;
+	font-weight: bold;
+	color: #0fc800;
+	background-color: inherit;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+/*	clear: both; */
+}
+
+DIV.Gameshow  DIV.QuestionFeedback {
+	clear: both;
+	padding: 15px 0px 0px 0px;
+}
+DIV.Gameshow  DIV.PositiveFeedback {
+	font-family: Arial;
+    font-size: 11pt;
+	color: #0fc800;
+	font-style: italic;
+	font-weight: bold;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none; 
+	clear: both;
+}
+DIV.Gameshow  DIV.NegativeFeedback {
+	font-family: Arial;
+    font-size: 11pt;
+	color: #9c0031;
+	font-style: italic;
+	font-weight: bold;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none; 
+	clear: both;
+}
+DIV.Gameshow  DIV.QuestionFeedback DIV.Col1 {
+	float: left;
+	width: 29px;
+}
+DIV.Gameshow  DIV.QuestionFeedback DIV.Col2 {
+	float: left;
+}
+DIV.Gameshow  DIV.QuestionFeedback DIV.IncorrResponse {
+	font-family: Arial;
+    font-size: 11pt;
+	color: #9c0031;
+	font-style: italic;
+	font-weight: bold;
+	padding: 0px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+}
+
+DIV.Gameshow  DIV.Hint {
+	font-style: italic;
+	padding: 10px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+}
+
+DIV.Gameshow  DIV.Hint SPAN {
+	font-weight: bold;
+}
+
+DIV.SubmitGameshow  {
+	padding: 10px 0px 10px 30px;
+	font-weight: bold;
+	clear: both;
+}
+DIV.SubmitGameshow  INPUT {
+/*	padding: 2px 10px 2px 10px;
+	background-color: #9c0031;
+	background-color: #33bced; */
+	color: #ffffff;
+	border: none;
+	height: 28px;
+	width: 100px;
+	background: url(../../media/Core/submit_background.png) left top no-repeat;	
+}
+DIV.SubmitGameshow  SPAN {
+	padding-left: 8px;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+/* Gameshow  end ----------*/
+/*---------------------------------*/
+
+/*--------------------------------*/
+/* WebFillInBlank begin ----------*/
+
+DIV.WebFillInBlank {
+	/*border-left: 1px solid #999999;
+	border-bottom: 1px solid #999999;*/
+	width: 590px;
+}
+DIV.WebFillInBlank OL {
+	list-style-type: none;
+	padding-bottom: 20px;
+}
+DIV.WebFillInBlank OL LI {
+	padding-top: 1px;
+}
+DIV.WebFillInBlank DIV.QuestionStem {
+	padding: 8px 0px 8px 0px;
+	min-height: 35px; 
+	margin-bottom: 1px;
+	color: #ffffff;
+	background: #18386b url(../../media/Core/question-stem_background.png) left top no-repeat;
+}
+DIV.WebFillInBlank DIV.PositiveFeedback {
+	font-style: italic;
+	font-weight: bold;
+	color: #18386b;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none; 
+	clear: both;
+}
+DIV.WebFillInBlank DIV.NegativeFeedback {
+	font-style: italic;
+	font-weight: bold;
+	color: #9c0031;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none; 
+	clear: both;
+}
+DIV.WebFillInBlank DIV.QuestionStem DIV.QuestionStemInnerWrapper {
+       margin: 0px 5px 0px 45px;
+}
+DIV.WebFillInBlank DIV.QuestionStem DIV.QuestionStemInnerWrapper DIV {
+	margin-left: 0px;
+}
+DIV.FillInContent {
+	clear: both;
+	margin-top: 15px;
+}
+DIV.FillInContent SPAN.Text {
+	padding: 4px 2px 2px 0px;
+}
+DIV.FillInContent SPAN.BlankInput {
+	padding: 0px 3px 0px 3px;
+}
+DIV.FillInContent SELECT.DropDownList{
+	margin-bottom: 3px;
+	margin-left: 0px;
+	margin-right: 2px;
+	margin-top: 3px;
+	min-width: 156px;
+	font-weight: bold;
+}
+DIV.FillInContent SELECT.DropDownList OPTION.DropDownOption {
+	min-width: 90px;
+	font-weight: bold;
+}
+DIV.FillInContent SPAN.BlankInput INPUT {
+	font-weight: bold;
+	padding: 0px 2px 0px 3px;
+	vertical-align: middle;
+}
+DIV.FillInContent SPAN.BlankInput IMG {
+	display: none;
+	visibility: hidden;
+	border: none;
+}
+
+DIV.FillInContent DIV.FeedbackSection {
+	/* display: none; */
+	clear: both;
+	padding: 5px 0px 0px 0px;
+	width: 80%;
+}
+DIV.FillInContent DIV.FeedbackSection DIV.UserResponse {
+	width: 15%;
+	font-weight: bold;
+	visibility: hidden;
+	display: none;
+	float: left;
+}
+DIV.FillInContent DIV.FeedbackSection DIV.FeedbackResponse {
+	float: left;
+}
+DIV.FillInContent DIV.FeedbackSection SPAN.CorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #1595ec;
+	padding: 0px;
+	visibility: hidden;
+	display: none;
+}
+DIV.FillInContent DIV.FeedbackSection SPAN.IncorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #f2105a;
+	padding: 0px;
+	visibility: hidden;
+	display: none;
+}
+DIV.FillInContent DIV.FeedbackSection SPAN.PositiveFb,SPAN.NegativeFb {
+	font-style: italic;
+	padding: 0px 100px 0px 0px;
+	visibility: hidden;
+	display: none;
+}
+DIV.FillInContent DIV.FeedbackSection SPAN.ThisIsCorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #12cb9f;
+	padding: 0px;
+	visibility: hidden;
+	display: none;
+}
+
+DIV.WebFillInBlank DIV.Hint {
+	clear: both;
+	font-style: italic;
+	padding: 10px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+}
+DIV.WebFillInBlank DIV.Hint SPAN {
+	font-weight: bold;
+}
+
+DIV.FillInContent DIV.QuestionFeedback {
+	clear: both;
+	padding: 15px 0px 0px 0px;
+}
+DIV.FillInContent DIV.QuestionFeedback DIV.Col1 {
+	float: left;
+	width: 29px;
+}
+DIV.FillInContent DIV.QuestionFeedback DIV.Col2 {
+	float: left;
+	width: 80%;
+}
+DIV.FillInContent DIV.QuestionFeedback DIV.IncorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #f2105a;
+	padding: 0px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+}
+
+DIV.SubmitWfib SPAN {
+	font-weight: bold;
+}
+
+DIV.SubmitWfib {
+	padding: 20px 0px 10px 30px;
+	clear: both;
+}
+DIV.SubmitWfib INPUT {
+	/*font-weight: bold;
+	padding: 2px 10px 2px 10px;
+	background-color: #c6d7ef;
+/*	background-color: #33bced; * /
+	color: #6681aa;*/
+	color: #ffffff;
+	border: none;
+	height: 28px;
+	width: 100px;
+	background: url(../../media/Core/submit_background.png) left top no-repeat;
+}
+DIV.SubmitWfib SPAN {
+	padding-left: 8px;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+/* WebFillInBlank end ----------*/
+/*------------------------------*/
+
+/*--------------------------------*/
+/* WebGridQuestion begin ----------*/
+DIV.WebGridQuestion {
+        width: 500px;
+        position:absolute;
+}
+DIV.WebGridQuestion OL {
+        padding-bottom: 20px;
+        list-style-type: none;
+}
+DIV.WebGridQuestion OL LI {
+        margin-left: -40px;
+}
+DIV.WebGridQuestion DIV.ListType LI {
+        margin-left: 0px;
+}
+DIV.WebGridQuestion DIV.QuestionStem {
+        padding: 8px 0px 8px 0px;
+        min-height: 35px; 
+        margin-bottom: 1px;
+        color: #ffffff;
+        background: #18386b url(../../media/Core/question-stem_background.png) left top no-repeat;
+}
+DIV.WebGridQuestion DIV.QuestionStem DIV.QuestionStemInnerWrapper {
+        margin: 0px 5px 0px 45px;
+}
+DIV.WebGridQuestion DIV.QuestionStem DIV.QuestionStemInnerWrapper DIV {
+        margin-left: 0px;
+}
+DIV.WebGridQuestion DIV.Headers{
+        padding: 0px 0px 0px 0px;
+        text-align: center;
+}
+DIV.WebGridQuestion DIV.Headers DIV.Usual {
+        clear: both;
+}
+DIV.WebGridQuestion DIV.Headers DIV.Col1 {
+        float: left;
+        width: 268px;
+        vertical-align: middle;
+}
+DIV.WebGridQuestion DIV.Option {
+        padding: 0px 0px 0px 0px;
+        float:left;
+        width:100%;
+        border-top: 1px solid #ffffff;
+        vertical-align: middle;
+}
+DIV.WebGridQuestion DIV.Light {
+        float:left;
+        width:100%;
+        background-color: #dedede;
+        vertical-align: middle;
+}
+DIV.WebGridQuestion DIV.Dark {
+        width:100%;
+        float:left;
+        background-color: #d6d6d6;
+        vertical-align: middle;
+}
+DIV.WebGridQuestion DIV.Option DIV.Col1 {
+        float: left;
+        width: 29px;
+        vertical-align: middle;
+}
+DIV.WebGridQuestion DIV.Div2InnerWrapper {
+        vertical-align: middle;
+        height:100%; 
+}
+
+DIV.WebGridQuestion TD.DivGridAmswer{
+        width:30px; 
+        height:30px;
+        vertical-align: middle;
+        text-align:center;
+        background-image: url('/europa/ContentPackages/Core/Transforms/media/gridSqBlack.png');
+        background-repeat:no-repeat;
+}
+
+DIV.WebGridQuestion TD.DivGridInput{
+        width: 37px; 
+        height: 29px;        
+        text-align: center;
+        vertical-align: middle;
+        background-image: url('/europa/ContentPackages/Core/Transforms/media/gridCircleBlack.png');
+        background-position: center;
+        background-repeat:no-repeat;
+}
+
+DIV.WebGridQuestion TD.DivGridInput:HOVER{
+        background-image: url('/europa/ContentPackages/Core/Transforms/media/gridCircleYellow.png');
+}
+
+DIV.WebGridQuestion DIV.Div1InnerWrapper{
+        width:238px; 
+        height:100%;
+        float:left; 
+        text-align:left; 
+}
+DIV.WebGridQuestion DIV.Option DIV.Col2 {
+        margin-left: 80px;
+        width: 510px;
+        color: #000031;
+}
+DIV.WebGridQuestion DIV.Option DIV.Col2 DIV.Col2Light {
+        background-color: #efefef;
+}
+DIV.WebGridQuestion DIV.Option DIV.Col2 DIV.Col2Dark {
+    background-color: #e7e7e7;
+}
+DIV.WebGridQuestion DIV.Option INPUT {
+    text-align: center;
+    vertical-align: middle;
+}
+DIV.WebGridQuestion DIV.CorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #18386b;
+	background-color: inherit;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+/*	float: left;*/
+}
+DIV.WebGridQuestion DIV.IncorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #9c0031;
+	background-color: inherit;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+/*	clear: both; */
+}
+
+DIV.SubmitGridQuestion {
+    padding: 20px 0px 10px 30px;
+    font-weight: bold;
+    clear: both;
+}
+DIV.SubmitGridQuestion INPUT {
+/*	padding: 2px 10px 2px 10px;
+	background-color: #9c0031;
+	background-color: #33bced; */
+	color: #ffffff;
+	border: none;
+	height: 28px;
+	width: 100px;
+	background: url(../../media/Core/submit_background.png) left top no-repeat;
+}
+DIV.SubmitGridQuestion SPAN {
+	padding-left: 8px;
+	font-size: 11px;
+	font-weight: bold;
+}
+/* WebGridQuestion end ----------*/
+/*------------------------------*/
+
+/*-------------------------------------*/
+/* WebSequenceActivity begin ----------*/
+
+DIV.WebSequenceActivity {
+	/*border-left: 1px solid #999999;
+	border-bottom: 1px solid #999999;*/
+	width: 600px;
+}
+DIV.WebSequenceActivity OL {
+	list-style-type: none;
+	padding-bottom: 20px;
+}
+DIV.WebSequenceActivity OL LI {
+}
+DIV.SequenceActivity DIV.QuestionStem {
+	width: 100%;
+	padding: 8px 0px 8px 0px;
+	min-height: 35px;
+	border-bottom: 1px solid #ffffff;
+	color: #ffffff;
+	background: #18386b url(../../media/Core/question-stem_background.png) left top no-repeat;
+}
+DIV.SequenceActivity DIV.QuestionStem DIV.QuestionStemInnerWrapper {
+       margin: 0px 5px 0px 45px;
+}
+DIV.SequenceActivity DIV.QuestionStem DIV.QuestionStemInnerWrapper DIV {
+	margin-left: 0px;
+}
+DIV.SequenceActivity DIV.SequenceStep {
+	padding: 0px 0px 0px 0px;
+	border-top: 1px solid #ffffff;
+}
+DIV.SequenceStep DIV.Dark {
+	background-color: #d6d6d6;
+	clear: both;
+    min-height: 45px;
+	padding: 0px;
+}
+DIV.SequenceStep DIV.Dark DIV.Select {
+	float: left;
+	width: 22%;
+}
+DIV.SequenceStep DIV.Dark DIV.Select DIV.SelectWrapper {
+	padding-top: 10px;
+}
+DIV.SequenceStep DIV.Dark DIV.Distractor {
+	background-color: #e7e7e7;
+	margin-left: 90px;
+	width: 76%;
+	min-height: 45px;
+}
+DIV.SequenceStep DIV.Dark DIV.Distractor DIV.DistractorWrapper {
+	padding: 10px 5px 5px 8px;
+}
+DIV.SequenceStep DIV.Light {
+	background-color: #dedede;
+	clear: both;
+    min-height: 45px;
+	padding: 0px;
+}
+DIV.SequenceStep DIV.Light DIV.Select {
+	float: left;
+	width: 22%;
+}
+DIV.SequenceStep DIV.Light DIV.Select DIV.SelectWrapper {
+	padding-top: 10px;
+}
+DIV.SequenceStep DIV.Light DIV.Distractor {
+	background-color: #efefef;
+	margin-left: 90px;
+	width: 76%;
+	min-height: 45px;
+}
+DIV.SequenceStep DIV.Light DIV.Distractor DIV.DistractorWrapper {
+	padding: 10px 5px 5px 8px;
+}
+
+
+DIV.SequenceStep DIV.Select SELECT {
+	width: 50px;
+	vertical-align: top;
+}
+
+DIV.WebSequenceActivity DIV.PositiveFeedback {
+	font-style: italic;
+	font-weight: bold;
+	color: #1595ec;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+}
+DIV.WebSequenceActivity DIV.NegativeFeedback {
+	font-style: italic;
+	font-weight: bold;
+	color: #f2105a;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+}
+
+DIV.WebSequenceActivity DIV.Hint {
+	font-style: italic;
+	padding: 10px 0px 0px 0px;
+	visibility: hidden;
+	clear: both;
+	display: none;
+}
+DIV.WebSequenceActivity DIV.Hint SPAN {
+	font-weight: bold;
+}
+
+DIV.WebSequenceActivity DIV.ThisIsCorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #12cb9f;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+}
+
+DIV.WebSequenceActivity DIV.QuestionFeedback {
+	clear: both;
+	padding: 15px 0px 0px 0px;
+}
+DIV.WebSequenceActivity DIV.QuestionFeedback DIV.Col1 {
+	float: left;
+	width: 29px;
+}
+DIV.WebSequenceActivity DIV.QuestionFeedback DIV.Col2 {
+	float: left;
+	width: 80%;
+}
+DIV.WebSequenceActivity DIV.QuestionFeedback DIV.IncorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #f2105a;
+	padding: 0px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+}
+
+DIV.SubmitWsa {
+	padding: 20px 0px 10px 30px;
+	font-weight: bold;
+	clear: both;
+}
+DIV.SubmitWsa INPUT {
+	/*padding: 2px 10px 2px 10px;
+	background-color: #c6d7ef;
+/*	background-color: #33bced; * /
+	color: #6681aa; */
+	color: #ffffff;
+	border: none;
+	height: 28px;
+	width: 100px;
+	background: url(../../media/Core/submit_background.png) left top no-repeat;
+}
+DIV.SubmitWsa SPAN {
+	padding-left: 8px;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+/* WebSequenceActivity end ----------*/
+
+/* WebDnDSequenceActivity begin ----------*/ 
+
+DIV.DnDSequencing DIV.CorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #18386b;
+	padding: 0px 0px 0px 10px;
+	visibility: hidden;
+	display: none;
+	float: left;
+}
+DIV.DnDSequencing DIV.IncorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #9c0031;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+}
+DIV.DnDSequencing DIV.TryAgain {
+	font-weight: bold;
+	color: #000000;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+}
+/* WebDnDSequenceActivity end ----------*/ 
+
+/*-----------------------------------*/
+
+/*-------------------------------------*/
+/* WebMatchingActivity begin ----------*/
+
+DIV.WebMatchingActivity {
+}
+DIV.WebMatchingActivity OL {
+	list-style-type: none;
+	padding-bottom: 20px;
+}
+DIV.WebMatchingActivity OL LI {
+	margin-left: -40px;
+}
+DIV.WebMatchingActivity DIV.ListType LI {
+	margin-left: 0px;
+}
+DIV.MatchingActivity DIV.QuestionStem {
+	width: 590px;
+	padding: 8px 0px 24px 0px;
+	border-bottom: 1px solid #ffffff;
+	color: #ffffff;
+	background: #18386b url(../../media/Core/question-stem_background.png) left top no-repeat;
+}
+DIV.MatchingActivity DIV.QuestionStem DIV.QuestionStemInnerWrapper {
+       margin: 0px 5px 0px 45px;
+}
+DIV.MatchingActivity DIV.QuestionStem DIV.QuestionStemInnerWrapper DIV {
+	margin-left: 0px;
+}
+TABLE.MaTable {
+	width: 590px;
+	border-collapse: collapse;
+	border-spacing: 0px;
+	empty-cells: show;
+}
+TABLE.MaTable TD {
+	padding: 4px;
+}
+TD.MaDistractorCellDark {
+    background-color: #d6d6d6;
+	border-bottom: 1px solid #ffffff;
+	vertical-align: top;
+	color: #000031;
+}
+TD.MaDistractor {
+	background-color: #dedede;
+	border-bottom: 1px solid #ffffff;
+	vertical-align: top;
+	color: #000031;
+}
+TD.MaDistractor DIV.LetterLabel {
+	font-weight: bold;
+	padding: 0px 4px 0px 4px;
+	float: left;
+}
+TD.MaDistractorCellDark DIV.LetterLabel {
+	font-weight: bold;
+	padding: 0px 4px 0px 4px;
+	float: left;
+}
+TD.MaDistractorCellDark DIV.DistractorContent {
+	float: left;
+}
+TD.MaDistractor DIV.DistractorContent {
+	float: left;
+}
+TD.MaDistractor DIV.DistractorContent DIV.Wysiwyg {
+	width: 100%;
+	padding-left: 1px; /* important for aligment in IE */
+}
+TD.MaDistractorCellDark DIV.DistractorContent DIV.Wysiwyg {
+	width: 100%;
+	padding-left: 1px; /* important for aligment in IE */
+}
+TD.MaMatchLabel {
+	background-color: #efefef;
+	border-bottom: 1px solid #ffffff;
+	vertical-align: top;
+	width: 32px;
+}
+TD.MaMatchLabelCellDark {
+        background-color: #e7e7e7;
+	border-bottom: 1px solid #ffffff;
+	vertical-align: top;
+	width: 32px;
+}
+TD.MaMatchLabel IMG {
+	visibility: hidden;
+	display: inline;
+}
+TD.MaMatchLabelCellDark IMG {
+	visibility: hidden;
+	display: inline;
+}
+TD.MaMatch {
+	background-color: #efefef;
+	border-bottom: 1px solid #ffffff;
+	color: #000031;
+}
+TD.MaMatchCellDark {
+        background-color: #e7e7e7;
+	border-bottom: 1px solid #ffffff;
+	color: #000031;
+}
+TD.MaMatch DIV.MatchSelect {
+	float: left;
+}
+TD.MaMatch SELECT {
+	margin-right: 10px;	
+	color: #000031;
+}
+TD.MaMatch DIV.MatchContent {
+	float: left;
+}
+TD.MaMatchCellDark DIV.MatchSelect {
+	float: left;
+}
+TD.MaMatchCellDark SELECT {
+	margin-right: 10px;	
+	color: #000031;
+}
+TD.MaMatchCellDark DIV.MatchContent {
+	float: left;
+}
+
+DIV.WebMatchingActivity DIV.PositiveFeedback {
+	font-style: italic;
+	font-weight: bold;
+	color: #18386b;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none; 
+	clear: both;
+}
+DIV.WebMatchingActivity DIV.NegativeFeedback {
+	font-style: italic;
+	font-weight: bold;
+	color: #9c0031;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none; 
+	clear: both;
+}
+
+DIV.WebMatchingActivity DIV.Hint {
+	font-style: italic;
+	padding: 10px 0px 0px 0px;
+	visibility: hidden;
+	display: none; 
+	clear: both;
+}
+DIV.WebMatchingActivity DIV.Hint SPAN {
+	font-weight: bold;
+}
+
+DIV.WebMatchingActivity DIV.ThisIsCorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #18386b;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+}
+
+DIV.WebMatchingActivity DIV.QuestionFeedback {
+	padding: 15px 0px 0px 0px;
+	clear: both;
+}
+DIV.WebMatchingActivity DIV.QuestionFeedback DIV.Col1 {
+	float: left;
+	width: 29px;
+}
+DIV.WebMatchingActivity DIV.QuestionFeedback DIV.Col2 {
+	float: left;
+	width: 80%;
+}
+DIV.WebMatchingActivity DIV.QuestionFeedback DIV.IncorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #9c0031;
+	padding: 0px 0px 0px 3px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+}
+
+DIV.SubmitWma {
+	padding: 20px 0px 10px 30px;
+	font-weight: bold;
+	clear: both;
+}
+DIV.SubmitWma INPUT {
+/*	padding: 2px 10px 2px 10px;
+	background-color: #c6d7ef;
+	background-color: #33bced;
+	color: #6681aa;*/
+	color: #ffffff;
+	border: none;
+	height: 28px;
+	width: 100px;
+	background: url(../../media/Core/submit_background.png) left top no-repeat;
+}
+DIV.SubmitWma SPAN {
+	padding-left: 8px;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+/* WebMatchingActivity end ----------*/
+/*-----------------------------------*/
+
+/*-----------------------------------*/
+/* WebDragDropActivity begin ----------*/
+DIV.WebDragDrop DIV.CorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #18386b;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+}
+DIV.WebDragDrop DIV.IncorrResponse {
+	font-style: italic;
+	font-weight: bold;
+	color: #9c0031;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+}
+DIV.WebDragDrop DIV.TryAgain {
+	font-weight: bold;
+	color: #000000;
+	padding: 2px 0px 0px 0px;
+	visibility: hidden;
+	display: none;
+	clear: both;
+}
+
+DIV.WebDragDrop OL {
+	padding-bottom: 20px;
+	list-style-type: none;
+}
+DIV.WebDragDrop OL LI {
+	margin-left: -40px;
+}
+
+DIV.WebDragDrop IMG{
+	display: block;
+}
+DIV.WebDragDrop {
+	position:relative;
+} 
+
+/* WebDragDropActivity end ----------*/
+/*-----------------------------------*/
+
+/*-----------------------------------*/
+/* NonScoredActivity begin ----------*/
+
+DIV.NonScoredActivity {
+	border-left: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+}
+DIV.NonScoredActivity OL {
+	list-style-type: square;
+	padding-bottom: 20px;
+}
+
+/* NonScoredActivity end ----------*/
+/*---------------------------------*/
+
+/*-----------------------------------*/
+/* EssayActivity begin ----------*/
+
+DIV.EssayActivity {
+	border-left: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+}
+DIV.EssayActivity DIV.QuestionStem {
+	width: 95%;
+	margin-bottom: 7px;
+}
+DIV.EssayActivity OL {
+	list-style-type: square;
+	padding-bottom: 20px;
+}
+DIV.EssayActivity DIV.Option {
+	width: 95%;
+	padding-left: 15px;
+}
+
+/* EssayActivity end ----------*/
+/*---------------------------------*/
+
+/*---------------------------------------------*/
+/* 'Next' popup for Activities begin ----------*/
+
+DIV.popup {
+   /*position: fixed; f..ing bug in IE with position: fixed!!! */
+   width: 270px;
+   visibility: hidden;
+   /*border: 1px solid #666666;
+   background-color: #c6d7ef;
+   color: #6681aa;*/
+   color: #ffffff;
+   background-color: #18386b;
+   padding: 5px 0px 5px 0px;
+   margin: 0px;
+   font-size: 13px;   
+   text-align: center;
+   font-weight: normal;
+} 
+DIV.popup SPAN {
+   font-weight: bold;
+}
+
+
+/* 'Next' popup for Activities end ----------*/
+/*-------------------------------------------*/
+
+
+/*-----------------------------*/
+/* RichText begin ----------*/
+
+SPAN.WysiwygEmph {
+   font-weight: bold;
+}
+SPAN.WysiwygItalic {
+   font-style: italic;
+}
+SPAN.WysiwygDoubleUnderline {
+    border-bottom:3px double;
+}
+SPAN.WysiwygUnderline {
+   text-decoration: underline;
+}
+SPAN.WysiwygOverline{
+   text-decoration: overline;
+}
+SPAN.WysiwygStrike {
+   text-decoration: line-through;
+}
+SPAN.WysiwygEmphDoubleUnderline {
+    font-weight: bold;
+    border-bottom:3px double;
+}
+SPAN.WysiwygEmphItalic {
+    font-weight: bold;
+    font-style: italic;
+}
+SPAN.WysiwygEmphItalicDoubleUnderline {
+    font-weight: bold;
+    border-bottom:3px double;
+    font-style: italic;
+}
+SPAN.WysiwygEmphItalicUnderline {
+    font-weight: bold;
+    text-decoration: underline;
+    font-style: italic;
+}
+SPAN.WysiwygEmphUnderline {
+    font-weight: bold;
+    text-decoration: underline;
+}
+SPAN.WysiwygItalicDoubleUnderline {
+    border-bottom:3px double;
+    font-style: italic;
+}
+SPAN.WysiwygItalicUnderline {
+    text-decoration: underline;
+    font-style: italic;
+}
+SPAN.WysiwygFootnote {
+   font-family: Verdana;
+}
+SPAN.WysiwygInLineCode {
+   font-family: Courier;
+   font-size: 1em;
+   color: #666666;
+}
+SPAN.WysiwygInLineTerm {
+   color: blue;
+   text-decoration: underline;
+}
+SPAN.WysiwygInLineLabFile {
+   font-weight: bold;
+   font-style: italic;
+}
+SPAN.WysiwygInLineKeyword { 
+   font-style: italic;
+   font-weight: bold;
+}
+SPAN.WysiwygInLineKeyboard { 
+   font-variant: small-caps;
+}
+SPAN.WysiwygInLineMenuSelection { 
+   font-weight: bold;
+}
+SPAN.WysiwygInLineTypeThis { 
+   font-family: Courier;
+   font-style: italic;
+   font-weight: bold;
+   font-size: 1em;
+   color: #666666;
+   margin-right: 7px;
+}
+SPAN.WysiwygInLineApplicationPrompt {
+   font-style: italic;
+}
+SPAN.WysiwygInLineWindowName {
+   font-weight: bold;
+   font-variant: small-caps;
+}
+SPAN.WysiwygInLineInstructorText { 
+   font-weight: normal;
+   font-style: italic;
+   text-transform: uppercase;
+}
+SPAN.WysiwygCommandName { 
+   font-weight: bold;
+   font-family: Courier;
+}
+SPAN.WysiwygSyntaxArg { 
+   font-style: italic;
+   font-family: Courier;
+}
+SPAN.WysiwygSyntaxKeyword { 
+   font-weight: bold;
+   font-family: Courier;
+   font-style: italic;
+}
+
+SPAN.WysiwygEmphUrl {
+   font-weight: bold;
+   font-style: italic;
+   border-bottom: 1px dotted blue;
+}
+SPAN.WysiwygEmphUrl A {
+   border-bottom: 1px dotted blue;
+}
+SPAN.WysiwygHRef {
+   color: blue;
+   text-decoration: underline;
+}
+SPAN.WysiwygReviewerText {
+   color: red;
+   text-weight: bold;
+}
+
+/* RichText end ----------*/
+/*---------------------------*/
+
+
+/*--------------------------------------*/
+/* CompetencyDefinition begin ----------*/
+
+DIV.CompetencyDef {
+   font-family: inherit;
+   font-size: inherit;
+   color: inherit;
+   margin-top: 15pt;
+   margin-bottom: 15px;
+}
+DIV.CompetencyDef DIV.ID, DIV.Label, DIV.Registered, DIV.Description {
+}
+
+/* CompetencyDefinition end ----------*/
+/*------------------------------------*/
+
+
+
+/* ----- Slide ----- */
+/*
+DIV.Slide {
+   font-family: Helvetica;
+   width: 640px;
+   height: 480px;
+   border-top: 1px solid #cccccc;
+   border-left: 1px solid #cccccc;
+   border-bottom: 2px solid #666666;
+   border-right: 2px solid #666666;
+   margin-top: 15pt;
+}
+DIV.TitleSlide {
+   line-height: 30pt;
+   font-size: 16pt;
+   font-weight: bold;
+   padding-left: 10pt;
+   vertical-align: bottom;
+}
+DIV.SlideRuler {
+   background-image: url(../../media/Core/slide-ruler.gif);
+   background-repeat: no-repeat;
+   height: 24px;
+   font-size: 10pt;
+   font-weight: bold;
+   color: #ffffff;
+   text-align: right;
+   padding-right: 70pt;
+   padding-top: 3pt;
+   margin-bottom: 5pt; 
+}
+DIV.SlideBody {
+   font-size: 11pt;
+   padding-left: 20pt;
+   padding-right: 20pt;
+   height: 375px;
+}
+DIV.SlideFooter {
+   font-size: 8pt;
+   padding-left: 5pt;
+   margin-top: 5pt;
+   color: #999999;
+}
+
+DIV.TitleSlideDeck {
+   font-size: 18pt;
+   font-weight: bold;
+   padding-left: 10pt;
+   vertical-align: bottom;
+}
+*/
+
+
+DIV.Slide {
+   font-family: Helvetica;
+   width: 960px;
+   height: 700px;
+   border-top: 1px solid #cccccc;
+   border-left: 1px solid #cccccc;
+   border-bottom: 2px solid #666666;
+   border-right: 2px solid #666666;
+   margin-top: 15pt;
+   background-image: url(../../media/Core/slide_background.jpg);
+   background-repeat: no-repeat;
+}
+DIV.SlideHeight{
+	height:575px;
+	overflow: hidden;
+}
+DIV.SlideHeightTopic{
+	height:245px;
+}
+DIV.SlideTitle {
+   padding-top: 48px;
+   padding-bottom: 20px;
+   font-size: 32px;
+   font-weight: bold;
+   color: #465d75;
+   text-align: center;
+}
+DIV.SlideTitleTopic{
+   padding-top: 20px;
+   padding-bottom: 10px;
+   padding-left: 10px;
+   padding-right: 10px;
+   font-size: 15px;
+   font-weight: bold;
+   color: #465d75;
+   text-align: center;
+}
+DIV.SlideBody {
+   font-size: 20px;
+   padding: 1px 40px 0px 45px;
+}
+
+DIV.SlideBodyTopic{
+   font-size: 12px;
+   padding: 1px 15px 1px 20px;
+}
+DIV.SlideFooter {
+   width: 100%;
+}
+DIV.SlideFooter TABLE {
+   width: 100%;
+   border-top: 2px solid #333333;
+   margin-top: 0px;
+}
+DIV.SlideFooter TABLE TR {
+   height: 60px;
+}
+DIV.SlideFooter TABLE TD.col1 {
+   vertical-align: top;
+   width: 30%;
+   color: #ffffff;
+}
+DIV.SlideFooter TABLE TD.col1 DIV {
+   font-size: 12px;
+   font-weight: bold;
+   background-color: #465d75;
+   width: 45%;
+   padding: 2px 4px 2px 4px;
+   margin: 0 0 0 50px;
+   text-align: center;
+}
+DIV.SlideFooter TABLE TD.col1 DIV.col1div{
+   font-size: 8px;
+   padding: 2px 6px 2px 2px;
+   margin: 0 0 0 10px;
+}
+DIV.SlideFooter TABLE TD.col2 {
+   font-size: 10px;
+   color: #465d75;
+   vertical-align: bottom;
+   text-align: center;
+   width: 38%;
+}
+DIV.SlideFooter TABLE TD.col2 DIV{
+   font-size: 8px;
+}
+DIV.SlideFooter TABLE TD.col3 {
+   vertical-align: top;
+   text-align: right;
+   padding-right: 15px;
+   width: 30%;
+}
+DIV.SlideFooter TABLE TD.col3  DIV{
+   padding-right: 10px;
+}
+
+DIV.TitleSlideDeck {
+   font-size: 18pt;
+   font-weight: bold;
+   padding-left: 10pt;
+   padding-top: 250pt;
+   text-align: center;
+   color: #003366;
+   vertical-align: bottom;
+}
+
+/*--- Slide end ---*/
+/*-----------------*/
+
+
+/* ----------- */
+/* --- Lab --- */
+
+DIV.LabType {
+}
+DIV.Title_Lab {
+   font-size: 16px;
+   font-weight: bold;
+   font-style: italic;
+   color: #999999;
+   background-color: inherit;
+   padding: 12px 0px 2px 0px;
+}
+DIV.LabEnder {
+   line-height: 7pt;
+   border: 1px solid #808080;
+   margin: 10px 0px 10px 0px;
+   background-color: #cccccc;
+}
+OL.LabSteps {
+   list-style-type: decimal;
+}
+OL.LabSteps LI.LabStep {
+   list-style-position: outside;
+   padding: 0px 0px 3px 0px;
+   font-weight: bold;
+}
+OL.LabSteps DIV {
+   font-weight: normal;
+}
+
+DIV.LabSolution {
+}
+DIV.StepsLabNote {
+   font-style: italic;
+   padding: 10px;
+}
+DIV.StepLabNote {
+   font-style: italic;
+   padding: 10px;
+}
+DIV.StepsLabText {
+}
+DIV.StepLabText {
+}
+
+
+/*--- Lab end ---*/
+/*---------------*/
+
+
+
+
+
+
+
+
+/* for Yum Demo */
+/* ----- Standard ----- */
+
+DIV.Standard {
+}
+
+DIV.Criteria {
+   margin-left: 25px;
+}
+DIV.CSL_Example {
+   color: #666666;
+}
+DIV.CSL_NonExample {
+   color: #666666;
+}
+DIV.CSL_Explanation {
+   color: #666666;
+}
+DIV.CSL_Example SPAN {
+   font-size: 9px;
+   font-weight: bold;
+   color: #666666;
+}
+DIV.CSL_NonExample SPAN {
+   font-size: 9px;
+   font-weight: bold;
+   color: #666666;
+}
+DIV.CSL_Explanation SPAN {
+   font-size: 9px;
+   font-weight: bold;
+   color: #666666;
+}
+DIV.CSL_Example UL {
+   margin-top: 3px;
+   margin-bottom: 3px;
+   padding: 0px;
+}
+
+
+
+/*------------------*/
+/* --- CiscoRIO --- */
+
+DIV.CiscoRIO {
+	text-align: left;
+	width: 640px;
+}
+DIV.CisciRIO DIV.RLOs {
+}
+
+
+/*----------------------------------------*/
+/*--- CiscoRIO shared components begin ---*/
+
+DIV.Title_Procedure {
+	font-size: 14px;
+	font-weight: bold;
+	font-style: italic;
+	text-decoration: none;	
+	color: inherit;
+	background-color: inherit;
+	/*due to the IE bug of clipping text in negative margin */
+	position: relative;
+	/* left: -135px; */
+}
+DIV.Title_Process {
+	font-size: 14px;
+	font-weight: bold;
+	font-style: italic;
+	text-decoration: none;	
+	color: inherit;
+	background-color: inherit;
+	/*due to the IE bug of clipping text in negative margin */
+	position: relative;
+	/* left: -135px; */
+}
+DIV.Title_Principle {
+	font-size: 14px;
+	font-weight: bold;
+	font-style: italic;
+	text-decoration: none;	
+	color: inherit;
+	background-color: inherit;
+	/*due to the IE bug of clipping text in negative margin */
+	position: relative;
+	/* left: -135px; */
+}
+DIV.Introduction {
+	font-size: inherit;
+	font-weight: inherit;
+	text-decoration: none;	
+	color: inherit;
+	background-color: inherit;
+	padding: 0px 0px 10px 0px;
+}
+
+/*--- CiscoRIO shared components end ---*/
+/*--------------------------------------*/
+
+
+/* ------------------------------------------------ */
+/* Concept, Facts, Principle, Procedure, Process */
+
+DIV.Concept {
+	margin: 25px 0px 25px 0px; 
+}
+DIV.Title_Concept {
+	font-size: 14px;
+	font-weight: bold;
+	font-style: italic;
+	text-decoration: none;	
+	color: inherit;
+	background-color: inherit;
+	/*due to the IE bug of clipping text in negative margin */
+	position: relative;
+	/* left: -135px; */
+}
+DIV.Concept DIV.Terms {
+	background-color: inherit;
+	margin: 20px 0px 20px 0px;
+}
+DIV.Title_Terms{
+	font-weight: bold;
+	text-align: left;
+}
+DIV.Heading_ConceptTerms {
+	font-size: 14px;
+	font-weight: bold;
+	color: #666666;
+}
+
+
+DIV.Facts {
+	margin: 25px 0px 25px 0px; 
+}
+DIV.Title_Facts {
+	font-size: 14px;
+	font-weight: bold;
+	font-style: italic;
+	text-decoration: none;	
+	color: inherit;
+	background-color: inherit;
+	/*due to the IE bug of clipping text in negative margin */
+	position: relative;
+	/* left: -135px; */
+}
+
+DIV.Principle {
+	margin: 25px 0px 25px 0px; 
+}
+DIV.Principle DIV.PrincipleStatement {
+	font-weight: bold;
+	padding-top: 5px;
+	margin-left: 1in;
+	margin-right: 1in;
+	text-align: justify;
+}
+DIV.Principle DIV.Guidelines {
+	padding: 7px 0px 7px 0px;
+}
+/*contains List, which is defined in Core.css*/
+
+
+DIV.Procedure {
+	margin: 25px 0px 25px 0px; 
+	width: 100%;
+}
+DIV.Procedure DIV.Demonstration {
+}
+DIV.Demonstration DIV.Heading {
+}
+
+
+DIV.Process {
+	margin: 25px 0px 25px 0px; 
+}
+DIV.Process DIV.StageTable {
+/*contains Table, which is defined in Core.css*/
+}
+
+DIV.Topic DIV{
+	text-align: justify;
+}
+.Topic{
+/*	padding-top: 12pt;*/
+}
+.ListItemPara{
+	font-size: 10pt;
+	font-family: Arial;
+	/*padding-left: 0.3in;*/
+	padding-top: 12pt;
+}
+.ListItemParaNum{
+padding-right: 0.3in;
+}
+.ListItemParaNumMobile{
+padding-right: 0.05in;
+}
+DIV.Topic_Title {
+	font-size: 10pt;
+	font-weight: bold;
+	font-family: Arial;
+	text-transform: uppercase;
+	/*due to the IE bug of clipping text in negative margin */
+	padding-top: 12pt;
+/*	padding-top: .25in;*/
+	margin-left: -.5in;
+	/* left: -135px; */
+}
+DIV.Topic_SubTitle {
+	font-size: 10pt;
+	font-weight: bold;
+	font-family: Arial;
+	text-transform: uppercase;
+	/*due to the IE bug of clipping text in negative margin */
+	padding-top: 12pt;
+	margin-left: -.5in;
+/*	top: 0.25in;*/
+	/*padding-left: .5in;*/
+	/* left: -135px; */
+}
+
+DIV.Topic_Title_level1 {
+	font-size: 10pt;
+	font-weight: bold;
+	font-family: Arial;
+	text-decoration: none;	
+	text-transform: uppercase;
+	color: inherit;
+	background-color: inherit;
+	/*due to the IE bug of clipping text in negative margin */
+	position: relative;
+	margin-left: -.5in;
+	padding-top: 12pt;
+	/*left: 0.5in;*/
+	/* left: -135px; */
+}
+DIV.Topic_SubTitle_level1 {
+	font-size: 13px;
+	font-weight: normal;
+	text-decoration: none;	
+	color: inherit;
+	padding-top: 12pt;
+	background-color: inherit;
+	margin-left: -.5in;
+	/*due to the IE bug of clipping text in negative margin */
+	position: relative;
+	/* left: -135px; */
+}
+
+DIV.Topic_Title_level2 {
+	font-size: 13px;
+	font-weight: bold;
+	font-style: italic;
+	padding-top: 12pt;
+	text-decoration: none;	
+	color: inherit;
+	margin-left: -.5in;
+	background-color: inherit;
+	/*due to the IE bug of clipping text in negative margin */
+	position: relative;
+	/* left: -135px; */
+}
+DIV.Topic_SubTitle_level2 {
+	font-size: 12px;
+	padding-top: 12pt;
+	font-weight: normal;
+	font-style: italic;
+	text-decoration: none;	
+	margin-left: -.5in;
+	color: inherit;
+	background-color: inherit;
+	/*due to the IE bug of clipping text in negative margin */
+	position: relative;
+	/* left: -135px; */
+}
+DIV.Title_Applet {
+	font-size: 14px;
+	font-weight: bold;
+	font-style: italic;
+	text-decoration: none;	
+	color: inherit;
+	background-color: inherit;
+	/*due to the IE bug of clipping text in negative margin */
+	position: relative;
+	left: -35px;
+}
+
+DIV.Category_Label {
+	font-weight: bold;
+}
+
+DIV.Category_Description {
+	
+}
+
+DIV.Category_Detail {
+	
+}
+
+DIV.Title_Categories {
+	font-weight: bold;
+    text-align: left;
+}
+DIV.ImageMap {
+	padding: 3px;
+}
+DIV.Title_ImageMap {
+	font-weight: bold;
+    text-align: left;
+}
+DIV.Title_DragDrop {
+	font-weight: bold;
+    text-align: left;
+}
+/* ------------------------------------------------ */
+/* Flash, Movie, Audio */
+DIV.Movie {
+	text-align: center;
+	margin-bottom: 3px;
+}
+DIV.Audio {
+	text-align: center;
+	margin-bottom: 3px;
+}
+DIV.Applet {
+	text-align: center;
+	margin-bottom: 3px;
+}
+DIV.Flash {
+	text-align: center;
+	margin-bottom: 3px;
+}
+DIV.Title_Flash {
+	font-weight: bold;
+    text-align: left;
+}
+/* ------------------------------------------------ */
+div.button {
+	color: black ;
+	background: #dcdcdc ;
+	border-top: 1px solid #ccc ;
+	border-right: 1px solid #333 ;
+	border-bottom: 1px solid #333 ;
+	border-left: 1px solid #ccc ;
+	margin: 2px 2px;
+	/*due to the IE bug of clipping text in negative margin */
+	position: relative;
+	left: -135px;
+	width: 180px;
+}
+div.button_title {
+	/*due to the IE bug of clipping text in negative margin */
+	position: relative;
+	left: -135px;
+	width: 180px;
+}
+a.menubutton:link {
+	text-decoration: none ;
+	color: black ;
+	background: #dcdcdc ;
+	display: block ;
+}
+a.menubutton:visited {
+	text-decoration: none ;
+	color: black ;
+	background: #dcdcdc ;
+	display: block ;
+}
+a.menubutton:hover {
+	text-decoration: none ;
+	color: yellow ;
+	background: black ;
+	display: block ;
+}
+a.menubutton:active {
+	text-decoration: none ;
+	color: yellow ;
+	background: black ;
+	display: block ;
+}
+a.menutitle:link {
+	text-decoration: none ;
+	color: white ;
+	background: #000066 ;
+	display: block ;
+}
+a.menutitle:visited {
+	text-decoration: none ;
+	color: white ;
+	background: #000066 ;
+	display: block ;
+}
+a.menutitle:hover {
+	text-decoration: none ;
+	color: yellow ;
+	background: black ;
+	display: block ;
+}
+a.menutitle:active {
+	text-decoration: none ;
+	color: yellow ;
+	background: black ;
+	display: block ;
+}
+table.Resources{
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid #000000;
+		margin-bottom:3px;
+}
+table.Resources td{
+        border: 1px solid #999999;
+}
+div.ResourcesTitle{
+        padding: 7px 7px 7px 5px;
+        font-weight: bold;
+        color: inherit;
+        background-color:inherit;
+        display: block;
+}
+div.ResourceTitle{
+        padding: 6px 7px 6px 5px;
+        font-weight: bold;
+        color: inherit;
+        background-color:inherit;
+        display: block;
+}
+div.ResourceDescription{
+        padding: 0px 7px 6px 5px;
+        color: inherit;
+        background-color:inherit;
+        display: block;
+}
+tr.Resource1{
+        background-color: #dddfee;
+}
+tr.Resource2{
+        background-color: #ffffff;
+}
+td.ResourceLink{
+        width: 80px;
+}
+img.ResourceDescription{
+        border-style: none;
+}
+
+.FlashXML{
+	margin-bottom: 3px;
+}
+
+DIV.FlashXMLTitle{
+	font-size: 16px;
+	font-weight: bold;
+	text-decoration: none;	
+	color: inherit;
+	background-color: inherit;
+	position: relative;
+}
+DIV.HorizontalLine{
+	border-bottom:0.5px solid black; 
+	width:inherit; 
+	height:20px;
+}
+
+/*------------ CPD DirectiveTitleTable-------------*/
+
+.DirectiveTitleTable{
+	height: 1.5in;
+	width: 7.25in;
+	border:1px solid #000000;
+	border-collapse:collapse;
+	border-spacing:0;
+}
+.DirectiveTitleTable .tr1{
+	height:0.9375in;
+	border:1px solid #000000;
+	border-collapse:collapse;
+	border-spacing:0;
+}
+.DirectiveTitleTable .tr2{
+	height:0.1875in;
+	border:1px solid #000000;
+	border-collapse:collapse;
+	border-spacing:0;
+}
+.DirectiveTitleTable .tr2 .td1{
+	width: 1.625in;
+	font-family: Arial;
+	text-transform: uppercase;
+	font-size: 9pt;
+	font-weight: bold;
+	padding-left: .125in;
+	border:1px solid #000000;
+	border-collapse:collapse;
+	border-spacing:0;
+}
+.DirectiveTitleTable .tr2 .td2{
+	width: 2in;
+	font-family: Arial;
+	font-size: 9pt;
+	padding-left: .125in;
+	border:1px solid #000000;
+	border-collapse:collapse;
+	border-spacing:0;
+}
+.DirectiveTitleTable .tr2 .td3{
+	font-family: Arial;
+	font-size: 9pt;
+	padding-left: .125in;
+	border:1px solid #000000;
+	border-collapse:collapse;
+	border-spacing:0;
+}
+.starImage{
+	width: 0.5625in;
+	height: 0.5625in;
+	padding-top: 0.03125in;
+	padding-left: 0.03125in;
+}
+.CPDLableTD{
+	font-family: Arial;
+	font-size: 10pt;
+ 	padding-top: 0.125in;
+}
+.starTD{
+	 width: 10%;
+}
+.CPDDirectiveTypeAndNumber{
+	font-family: Arial;
+	font-size: 13pt;
+	font-weight: bold;
+	padding-right: .125in;
+	text-align: right;
+	height : 1em;
+	overflow : hidden;
+}
+.CPDTitle{
+	font-family: Arial;
+	text-transform: uppercase;
+	font-size: 12pt;
+	font-weight: bold;
+}
+.rect{
+	width: 7.24in;
+	height:0.245in;
+}
+.DirectiveGlossaryElementTable .GlossaryTerm{
+	display: inline;
+}
+.DirectiveGlossaryElementTable .GlossaryDef{
+	display: inline;
+}
+.CPDDirectiveNumberM {
+	font-family: Arial;
+	font-size: 14pt;
+	font-weight: bold;
+	padding-bottom: 12pt;
+}
+.CPDTitleM {
+	font-family: Arial;
+	text-transform: uppercase;
+	font-size: 12pt;
+	font-weight: bold;
+	
+}
+.DirectiveAuthenticatedBy{
+margin-top: 24pt; 
+font-size: 10pt; 
+font-family: Arial;
+}
+.DirectiveSuperintendent{
+margin-top: 24pt; 
+margin-left: 4.5in; 
+margin-bottom: 12pt; 
+font-size: 10pt; 
+font-family: Arial; 
+white-space: nowrap;
+}
+.DirectiveSuperintendentM{
+margin-top: 24pt; 
+margin-left: 200px; 
+margin-bottom: 12pt; 
+font-size: 10pt; 
+font-family: Arial; 
+}
+.DirectiveNumberBottom{
+font-size: 10pt; 
+font-family: Arial; 
+margin-bottom: 12pt;
+}
+.DirectivePhoneGlossaryAddendaLables{
+ font-size: 10pt; 
+ font-family: Arial; 
+ font-weight: bold; 
+ margin-bottom: 12pt;
+}
+.DirectivePhoneGlossaryAddendaList{
+font-size: 10pt; 
+font-family: Arial; 
+margin-bottom: 12pt;   
+}
+.DirectivePhoneGlossaryAddendaCount{
+padding-left: 0.5in; 
+padding-right: 0.3in;
+}
+.DirectivePhoneValue{
+   font-weight: bold;
+   padding-bottom:5px;"
+}
+
+/*-------------------------------------------*/
+/*------------------Cover Page Style --------------*/
+.CoverPageTitle {
+	font-size: 16px;
+	font-weight: bold;
+	text-decoration: none;	
+	color: inherit;
+	background-color: inherit;
+	padding-bottom: 5px;
+	/*due to the IE bug of clipping text in negative margin */
+	position: relative;
+	/* left: -135px; */
+}
+.CoverPageSubTitle {
+	font-size: 16px;
+	font-weight: bold;
+	text-decoration: none;	
+	color: inherit;
+	background-color: inherit;
+	padding-bottom: 5px;
+	/*due to the IE bug of clipping text in negative margin */
+	position: relative;
+	/* left: -135px; */
+}
+/*----------------------------------*/

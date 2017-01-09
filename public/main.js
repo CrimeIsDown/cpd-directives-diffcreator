@@ -28,6 +28,12 @@ function openDirective(path, title) {
   $('#directiveViewer iframe').attr('src', path);
   $('#directiveViewer iframe').load(function () {
     $(this).contents().find('head').append('<link type="text/css" rel="stylesheet" href="/iframe.css">');
+    var head = $(this).contents().find('head').html();
+    head.replace('http://directives.chicagopolice.org/directives/data/ContentPackages/Core/Stylesheets/Core.css?bv=288', '/cpd-assets/Core.css')
+        .replace('http://directives.chicagopolice.org/directives/data/ContentPackages/components/General.css?bv=288', '/cpd-assets/General.css')
+        .replace('http://directives.chicagopolice.org/directives/data/ContentPackages/Core/Transforms/lang/en/strings.js?bv=288', '/cpd-assets/strings.js')
+        .replace('http://directives.chicagopolice.org/directives/data/ContentPackages/Core/Transforms/code/CommonUtilities.js?bv=288', '/cpd-assets/CommonUtilities.js');
+    $(this).contents().find('head').html(head);
   });
   $('#directiveViewer').modal();
   $('#directiveViewer input[type="text"]').val(window.location + '#' + path.substring(7));
