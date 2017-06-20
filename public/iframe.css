@@ -5,15 +5,17 @@ body {
 ins, del {
   text-decoration: none;
 }
+ins.diffins
 ins.diffmod {
   background-color: #a6f3a6;
 }
+del.diffdel,
 del.diffmod {
   background-color: #f8cbcb;
 }
-del.diffdel {
+/*del.diffdel {
   background-color: #ffecec;
 }
 ins.diffins {
   background-color: #eaffea;
-}
+}*/
