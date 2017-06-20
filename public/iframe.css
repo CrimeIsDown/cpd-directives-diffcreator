@@ -5,7 +5,7 @@ body {
 ins, del {
   text-decoration: none;
 }
-ins.diffins
+ins.diffins,
 ins.diffmod {
   background-color: #a6f3a6;
 }
