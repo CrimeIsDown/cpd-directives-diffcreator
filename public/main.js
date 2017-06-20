@@ -8,8 +8,8 @@ $.getJSON('diff_list.json', function(directives) {
 
   if (window.location.hash) {
     var path = window.location.hash.substring(1);
-    var title = $('#directives td > a[href="./diff/' + path + '"]').text();
-    openDirective('./diff/' + path, title);
+    var title = $('#directives td > a[href="https://directives.crimeisdown.com/diff/' + path + '"]').text();
+    openDirective('https://directives.crimeisdown.com/diff/' + path, title);
     window.location.hash = '';
   }
 });
@@ -27,7 +27,7 @@ function openDirective(path, title) {
   $('#directiveViewer iframe a').attr('href', path);
   $('#directiveViewer iframe').attr('src', path);
   $('#directiveViewer').modal();
-  $('#directiveViewer input[type="text"]').val(window.location + '#' + path.substring(7));
+  $('#directiveViewer input[type="text"]').val(window.location + '#' + path.substring(40));
   ga('send', 'event', 'Directive', 'open', title);
 }
 
