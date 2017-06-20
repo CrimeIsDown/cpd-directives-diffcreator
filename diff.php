@@ -62,7 +62,6 @@ class DirectiveDiffer
 
     private function writeDiff($difftext)
     {
-        $difftext = str_replace('="ContentPackages/', '="http://directives.chicagopolice.org/directives/data/ContentPackages/', $difftext);
         file_put_contents(self::PUBLIC_PATH."/diff/$this->commit/$this->file", $difftext);
     }
 
