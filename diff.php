@@ -73,7 +73,7 @@ class DirectiveDiffer
         preg_match('/<title>(.*?)<\/title>/', $html, $matches);
         if (count($matches)) {
             $metadata['title'] = $matches[1];
-            $metadata['link'] = '<a href="./diff/'.$metadata['path'].'">'.$metadata['title'].'</a>';
+            $metadata['link'] = '<a href="https://directives.crimeisdown.com/diff/'.$metadata['path'].'">'.$metadata['title'].'</a>';
         }
 
         preg_match('/<td class="td1">Issue Date:<\/td><td class="td2">(.*?)<\/td>/', $html, $matches);
