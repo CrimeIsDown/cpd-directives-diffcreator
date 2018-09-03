@@ -1,5 +1,8 @@
 <?php
 
+ini_set('display_errors', false);
+ini_set('log_errors', true);
+
 $url = strtolower($_SERVER['REQUEST_URI']);
 
 // Make sure the URI matches our scheme exactly (to avoid file traversal)
