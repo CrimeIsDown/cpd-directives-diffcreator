@@ -1,4 +1,7 @@
 #!/bin/bash
+git config --global user.name "Eric Tendian"
+git config --global user.email "erictendian@gmail.com"
+
 cd directives
 rm -Rf directives # inner folder
 wget --recursive -A "*.html*" --no-parent http://directives.chicagopolice.org/directives/

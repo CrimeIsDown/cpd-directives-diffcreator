@@ -3,12 +3,28 @@ version: '3'
 services:
   web:
     image: nginx:1-alpine
-    ports:
-     - "8001:80"
+    networks:
+      ingress:
+        aliases:
+         - directives-web
     volumes:
      - ./nginx.conf:/etc/nginx/conf.d/default.conf
      - .:/usr/share/nginx/html
   php:
     image: php:7-fpm-alpine
+    networks:
+      ingress:
+        aliases:
+         - directives-php
     volumes:
      - .:/var/www/html
+  updater:
+    build: .
+    volumes:
+     - /home/eric/.ssh:/root/.ssh
+     - .:/app
+
+networks:
+  ingress:
+    external:
+      name: ingress_default
