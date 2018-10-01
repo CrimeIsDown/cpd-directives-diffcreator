@@ -116,7 +116,7 @@ class ChangeFinder
             $this->finished_diffs = json_decode(file_get_contents(self::PUBLIC_PATH.'/diff_list.json'));
         } else {
             $this->finished_diffs = [];
-            file_put_contents(self::PUBLIC_PATH.'/diff_list.json', json_encode($this->finished_diffs));
+            file_put_contents(self::PUBLIC_PATH.'/diff_list.json', json_encode($this->finished_diffs), JSON_PRETTY_PRINT);
         }
     }
 
@@ -167,7 +167,7 @@ class ChangeFinder
 
     public function saveJson()
     {
-        file_put_contents(self::PUBLIC_PATH.'/diff_list.json', json_encode($this->finished_diffs));
+        file_put_contents(self::PUBLIC_PATH.'/diff_list.json', json_encode($this->finished_diffs, JSON_PRETTY_PRINT));
     }
 }
 
