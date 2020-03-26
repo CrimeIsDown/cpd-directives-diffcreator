@@ -1,4 +1,12 @@
-$.getJSON('diff_list.json', function(directives) {
+var form = document.getElementById('findDirectiveForm');
+form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var url = new URL(document.getElementById('url').value);
+    var date = document.getElementById('date').value;
+    location.assign(url.pathname + '?date=' + date);
+});
+
+$.getJSON('https://directives.crimeisdown.com/diff_list.json', function(directives) {
   $('#directives').bootstrapTable({data: directives});
 
   $('#directives td > a').click(function (event) {
@@ -9,9 +17,13 @@ $.getJSON('diff_list.json', function(directives) {
   if (window.location.hash) {
     var path = window.location.hash.substring(1);
     var title = $('#directives td > a[href="https://directives.crimeisdown.com/diff/' + path + '"]').text();
-    openDirective('https://directives.crimeisdown.com/diff/' + path, title);
     window.location.hash = '';
+    openDirective('https://directives.crimeisdown.com/diff/' + path, title);
   }
+
+  $('#directiveViewer').on('hidden.bs.modal', function (e) {
+    window.location.hash = '';
+  });
 });
 
 function dateSorter(a, b) {
@@ -27,7 +39,10 @@ function openDirective(path, title) {
   $('#directiveViewer iframe a').attr('href', path);
   $('#directiveViewer iframe').attr('src', path);
   $('#directiveViewer').modal();
-  $('#directiveViewer input[type="text"]').val(window.location + '#' + path.substring(40));
+  var url = (new URL(path)).pathname.replace('/diff/', '');
+  $('#directiveViewer #no-highlights-btn').attr('href', '/' + url);
+  window.location.hash = url;
+  $('#directiveViewer input[type="text"]').val(window.location);
   ga('send', 'event', 'Directive', 'open', title);
 }
 

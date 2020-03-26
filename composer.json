@@ -2,8 +2,8 @@
     "name": "erictendian/cpd-directives",
     "description": "See when Chicago Police change their policy. Revisions of the Chicago Police Department Directives System.",
     "require": {
-        "cpliakas/git-wrapper": "~1.4",
-        "caxy/php-htmldiff": "dev-master"
+        "cpliakas/git-wrapper": "^3.0",
+        "caxy/php-htmldiff": "^0.1.9"
     },
     "authors": [
         {

@@ -4,24 +4,45 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Chicago Police Department Directive Changes</title>
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.css">
-  <link rel="stylesheet" type="text/css" href="screen.css">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.16.0/bootstrap-table.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/screen.css">
 </head>
 <body>
-
-  <div class="container">
+  <div class="container-fluid">
     <div class="col-lg-12">
       <h1>Chicago Police Department Directive Changes</h1>
-      <h4>Diffs on all CPD directives updated since 2015. We check weekly for new updates. A project of <a href="https://crimeisdown.com/">CrimeIsDown.com</a>. View the raw diffs on <a href="https://github.com/CrimeIsDown/cpd-directives">GitHub</a>.</h4>
+      <p>Diffs on all CPD directives updated since 2015. We check weekly for new updates. A project of <a href="https://crimeisdown.com/">CrimeIsDown.com</a>. View the raw diffs on <a href="https://github.com/CrimeIsDown/cpd-directives">GitHub</a>.</p>
+      <p style="font-weight: bold">View what a directive looked like on a given date:</p>
+      <form id="findDirectiveForm" class="form-inline">
+        <label class="sr-only" for="url">
+          CPD directive URL
+        </label>
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">URL</div>
+          </div>
+          <input class="form-control" size="50" type="url" name="url" id="url" placeholder="http://directives.chicagopolice.org/directives/data/...">
+        </div>
+        <label class="sr-only" for="date">
+          Version as of date
+        </label>
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Date to look at</div>
+          </div>
+          <input class="form-control" type="date" name="date" id="date">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Open</button>
+      </form>
       <table id="directives" class="table" data-sort-name="issue_date" data-sort-order="desc">
         <thead>
           <tr>
-            <th data-field="link" data-sortable="true">Directive Title</th>
-            <th data-field="issue_date" data-sortable="true" data-sorter="dateSorter">Issue Date</th>
-            <th data-field="effective_date" data-sortable="true" data-sorter="dateSorter">Effective Date</th>
-            <th data-field="rescinds" data-sortable="true">Rescinds</th>
-            <th data-field="index_category" data-sortable="true">Index Category</th>
+            <th data-field="link" data-sortable="true" data-width="40" data-width-unit="%">Directive Title</th>
+            <th data-field="issue_date" data-sortable="true" data-sorter="dateSorter" data-width="10" data-width-unit="%">Issue Date</th>
+            <th data-field="effective_date" data-sortable="true" data-sorter="dateSorter" data-width="10" data-width-unit="%">Effective Date</th>
+            <th data-field="rescinds" data-sortable="true" data-width="20" data-width-unit="%">Rescinds</th>
+            <th data-field="index_category" data-sortable="true" data-width="20" data-width-unit="%">Index Category</th>
           </tr>
         </thead>
         <tbody>
@@ -34,8 +55,8 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title">Directive Name</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
         <div class="modal-body">
           <iframe src="#">
@@ -43,19 +64,20 @@
           </iframe>
         </div>
         <div class="modal-footer">
+          <a id="no-highlights-btn" href="#" target="_blank" class="btn btn-info mr-auto">View without highlights</a>
           <form class="form-inline">
             <label for="link">Shareable link</label>
             <input name="link" type="text" class="form-control" readonly>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
           </form>
         </div>
       </div>
     </div>
   </div>
 
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
-  <script type="text/javascript" src="main.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.16.0/bootstrap-table.min.js"></script>
+  <script type="text/javascript" src="assets/main.js"></script>
 </body>
 </html>

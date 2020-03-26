@@ -35,8 +35,7 @@ class DirectiveDiffer
     private function getNewFile()
     {
         try {
-            $this->git->show($this->commit.':'.$this->file);
-            return $this->git->getOutput();
+            return $this->git->show($this->commit.':'.$this->file);
         } catch (\Exception $e) {
             return false;
         }
@@ -45,8 +44,7 @@ class DirectiveDiffer
     private function getOldFile($new)
     {
         try {
-            $this->git->show($this->commit.'^1:'.$this->file);
-            return $this->git->getOutput();
+            return $this->git->show($this->commit.'^1:'.$this->file);
         } catch (\Exception $e) {
             $this->writeDiff($new);
             return false;
@@ -123,8 +121,7 @@ class ChangeFinder
     // find the commits that we have not checked for diffs
     public function getCommitsToDiff()
     {
-        $this->git->log('--format=%H');
-        $commits = explode("\n", trim($this->git->getOutput()));
+        $commits = explode("\n", trim($this->git->log('--format=%H')));
         $to_check = [];
 
         foreach ($commits as $i => $commit) {
@@ -142,8 +139,7 @@ class ChangeFinder
     {
         mkdir(self::PUBLIC_PATH."/diff/$commit/directives/data/", 0777, true);
         try {
-            $this->git->diff($commit, $commit.'^1', '--numstat', '-w', '--no-abbrev');
-            $file_list = explode("\n", trim($this->git->getOutput()));
+            $file_list = explode("\n", trim($this->git->diff($commit, $commit.'^1', '--numstat', '-w', '--no-abbrev')));
         } catch (\GitWrapper\GitException $e)  {
             return false; // probably first commit
         }
