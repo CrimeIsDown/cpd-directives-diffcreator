@@ -22,7 +22,9 @@ $.getJSON('https://directives.crimeisdown.com/diff_list.json', function(directiv
   }
 
   $('#directiveViewer').on('hidden.bs.modal', function (e) {
+    var scrollPos = window.scrollY;
     window.location.hash = '';
+    window.scroll(0, scrollPos);
   });
 });
 
