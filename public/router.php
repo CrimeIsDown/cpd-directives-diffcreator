@@ -39,7 +39,10 @@ if (preg_match('/^\/diff\/([a-z0-9]{40})\/directives\/data\/[a-z0-9\-]{45}\.html
 
     // @TODO Limit to hash
     if (isset($_GET['date'])) {
-        $commit = trim($git->run('rev-list', ['HEAD', $file, ['n' => '1', 'before' => $_GET['date']]]));
+        $commit = trim($git->run('rev-list', ['HEAD', $file, [
+            'n' => '1',
+            'before' => date('Y-m-d', strtotime($_GET['date'] . ' + 1 days'))
+        ]]));
     } else if (isset($_GET['commit']) && preg_match('/^[a-z0-9^~]+$/', $_GET['commit'])) {
         $commit = $_GET['commit'];
     } else {
