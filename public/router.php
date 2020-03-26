@@ -62,6 +62,7 @@ if (preg_match('/^\/diff\/([a-z0-9]{40})\/directives\/data\/[a-z0-9\-]{45}\.html
 
 // If one directive links to another, go to the version of it we had at the time of scraping
 $html = preg_replace('/<a href="([a-z0-9\-]{45})\.html" target="new">/i', '<a href="/directives/data/$1.html?commit='.$commit.'" target="new">', $html);
+$html = preg_replace('/<a href="([a-z0-9\-]{45})\.html">/i', '<a href="/directives/data/$1.html?commit='.$commit.'">', $html);
 
 // Add in our iframe css
 $html = str_replace('</head>', '<link type="text/css" rel="stylesheet" href="/assets/iframe.css">'."\n</head>", $html);
