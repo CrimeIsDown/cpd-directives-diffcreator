@@ -1,5 +1,5 @@
 <?php
-ini_set('display_errors', true);
+ini_set('display_errors', false);
 ini_set('log_errors', true);
 
 require __DIR__.'/../vendor/autoload.php';
@@ -11,7 +11,13 @@ $url = strtok($_SERVER['REQUEST_URI'], '?');
 // Make sure the URI matches our scheme exactly (to avoid file traversal)
 if (preg_match('/^\/diff\/([a-z0-9]{40})\/directives\/data\/[a-z0-9\-]{45}\.html$/', $url, $urlmatches)) {
     $commit = $urlmatches[1]; // Pull the commit from our regex
-    $html = file_get_contents(__DIR__.$url);
+    $path = __DIR__.$url;
+    if (file_exists($path)) {
+        $html = file_get_contents(__DIR__.$url);
+    } else {
+        http_response_code(404);
+        exit;
+    }
 } else if (preg_match('/^\/([a-z0-9]{40})\/directives\/data\/[a-zA-Z0-9\-_]+\.html$/', $url, $urlmatches)) {
     $file = substr($url, strpos($url, 'directives/data/'));
 
@@ -44,6 +50,7 @@ if (preg_match('/^\/diff\/([a-z0-9]{40})\/directives\/data\/[a-z0-9\-]{45}\.html
         $html = $git->show($commit.':'.$file);
     } catch (\Exception $e) {
         http_response_code(404);
+        exit;
     }
 } else {
     http_response_code(404);
@@ -55,5 +62,10 @@ $html = preg_replace('/<a href="([a-z0-9\-]{45})\.html" target="new">/i', '<a hr
 
 // Add in our iframe css
 $html = str_replace('</head>', '<link type="text/css" rel="stylesheet" href="/assets/iframe.css">'."\n</head>", $html);
+
+// Make CSS/JS/IMG URLs absolute
+$html = str_replace('"ContentPackages/', '"/directives/data/ContentPackages/', $html);
+$html = str_replace('"images/', '"/directives/data/images/', $html);
+$html = str_replace('"media/', '"/directives/data/media/', $html);
 
 echo $html;
