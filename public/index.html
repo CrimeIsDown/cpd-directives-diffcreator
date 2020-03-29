@@ -58,13 +58,28 @@
           <h4 class="modal-title">Directive Name</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
-        <div class="modal-body">
+        <div id="primaryDiffView" class="modal-body">
           <iframe src="#">
             <p>Your browser does not support iframes. <a href="#">View the directive here.</a></p>
           </iframe>
         </div>
+        <div id="sideBySideView" class="modal-body row" style="display: none">
+          <div class="col-md-6">
+            <h5 class="text-center">Old</h5>
+            <iframe id="oldVersion" src="#">
+              <p>Your browser does not support iframes. <a href="#">View the directive here.</a></p>
+            </iframe>
+          </div>
+          <div class="col-md-6">
+            <h5 class="text-center">New</h5>
+            <iframe id="newVersion" src="#">
+              <p>Your browser does not support iframes. <a href="#">View the directive here.</a></p>
+            </iframe>
+          </div>
+        </div>
         <div class="modal-footer">
           <a id="no-highlights-btn" href="#" target="_blank" class="btn btn-info mr-auto">View without highlights</a>
+          <a id="switch-diff-view" href="javascript:;" class="btn btn-info mr-auto">Side-by-side view</a>
           <form class="form-inline">
             <label for="link">Shareable link</label>
             <input name="link" type="text" class="form-control" readonly>

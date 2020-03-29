@@ -14,6 +14,10 @@ html, body {
   }
 }
 
+.modal-fullwidth {
+  max-width: 98% !important;
+}
+
 #directiveViewer iframe {
   width: 100%;
   height: 70vh;

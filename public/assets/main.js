@@ -1,3 +1,5 @@
+var BASE_URL = new URL(window.location).origin;
+
 var form = document.getElementById('findDirectiveForm');
 form.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -6,7 +8,7 @@ form.addEventListener('submit', function (event) {
     location.assign(url.pathname + '?date=' + date);
 });
 
-$.getJSON('https://directives.crimeisdown.com/diff_list.json', function(directives) {
+$.getJSON(BASE_URL + '/diff_list.json', function(directives) {
   $('#directives').bootstrapTable({data: directives});
 
   $('#directives td > a').click(function (event) {
@@ -16,15 +18,21 @@ $.getJSON('https://directives.crimeisdown.com/diff_list.json', function(directiv
 
   if (window.location.hash) {
     var path = window.location.hash.substring(1);
-    var title = $('#directives td > a[href="https://directives.crimeisdown.com/diff/' + path + '"]').text();
+    var title = $('#directives td > a[href="' + BASE_URL + '/diff/' + path + '"]').text();
     window.location.hash = '';
-    openDirective('https://directives.crimeisdown.com/diff/' + path, title);
+    openDirective(BASE_URL + '/diff/' + path, title);
   }
 
   $('#directiveViewer').on('hidden.bs.modal', function (e) {
     var scrollPos = window.scrollY;
     window.location.hash = '';
     window.scroll(0, scrollPos);
+  });
+
+  $('#switch-diff-view').click(function (e) {
+    $('#primaryDiffView').toggle();
+    $('#sideBySideView').toggle();
+    $('.modal-dialog').toggleClass('modal-fullwidth');
   });
 });
 
@@ -37,15 +45,20 @@ function dateSorter(a, b) {
 }
 
 function openDirective(path, title) {
-  $('#directiveViewer h4.modal-title').text(title);
+  path = path.replace('https://directives.crimeisdown.com', BASE_URL);
+  $('#directiveViewer .modal-title').text(title);
   $('#directiveViewer iframe a').attr('href', path);
   $('#directiveViewer iframe').attr('src', path);
   $('#directiveViewer').modal();
+  ga('send', 'event', 'Directive', 'open', title);
+
   var url = (new URL(path)).pathname.replace('/diff/', '');
-  $('#directiveViewer #no-highlights-btn').attr('href', '/' + url);
   window.location.hash = url;
   $('#directiveViewer input[type="text"]').val(window.location);
-  ga('send', 'event', 'Directive', 'open', title);
+  url = url.substring(url.indexOf('/')) + '?commit=' + url.substring(0, url.indexOf('/'));
+  $('#no-highlights-btn').attr('href', url);
+  $('iframe#oldVersion').attr('src', url + '^');
+  $('iframe#newVersion').attr('src', url);
 }
 
 $('#directiveViewer form input').focus(function (event) {
