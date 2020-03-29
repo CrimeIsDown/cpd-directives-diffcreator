@@ -55,7 +55,14 @@ class DirectiveDiffer
     {
         $diff = new HtmlDiff($old, $new);
         $diff->build();
-        return $diff->getDifference();
+        $diffHtml = $diff->getDifference();
+        // Hacky workaround for https://github.com/caxy/php-htmldiff/issues/59
+        $result = preg_replace('/<body(.*?)>(.*?)<\/body>/is', '<body>' . $diffHtml . '</body>', $new);
+        if ($result === $new) {
+            echo $new.PHP_EOL;
+            throw new \Exception('Failed to do replacement');
+        }
+        return $result;
     }
 
     private function writeDiff($difftext)
@@ -125,7 +132,8 @@ class ChangeFinder
         $to_check = [];
 
         foreach ($commits as $i => $commit) {
-            if (!file_exists(self::PUBLIC_PATH.'/diff/'.$commit)) {
+            $diff_folder = self::PUBLIC_PATH . '/diff/' . $commit;
+            if (!file_exists($diff_folder) || count(scandir($diff_folder . '/directives/data')) < 3) {
                 $to_check[] = $commit;
             }
         }
@@ -137,10 +145,13 @@ class ChangeFinder
 
     public function getFilesChangedInCommit($commit, &$changed_files)
     {
-        mkdir(self::PUBLIC_PATH."/diff/$commit/directives/data/", 0777, true);
+        $data_dir = self::PUBLIC_PATH."/diff/$commit/directives/data/";
+        if (!file_exists($data_dir)) {
+            mkdir(self::PUBLIC_PATH."/diff/$commit/directives/data/", 0777, true);
+        }
         try {
             $file_list = explode("\n", trim($this->git->diff($commit, $commit.'^1', '--numstat', '-w', '--no-abbrev')));
-        } catch (\GitWrapper\GitException $e)  {
+        } catch (\GitWrapper\Exception\GitException $e)  {
             return false; // probably first commit
         }
 
@@ -181,6 +192,7 @@ echo 'Need to calculate diffs for '.count($changed_files).' files'.PHP_EOL;
 foreach ($changed_files as $i => $file) {
     echo 'Calculating diff '.($i+1).' of '.count($changed_files).PHP_EOL;
     $c->generateDiff($file['commit'], $file['path']);
+    $c->saveJson();
 }
 
 echo 'Saving JSON...'.PHP_EOL;
