@@ -1,4 +1,7 @@
 #!/bin/bash
+echo "This script should not be run, it is not compatible with the current directives site."
+exit 1
+
 git config --global user.name "Eric Tendian"
 git config --global user.email "erictendian@gmail.com"
 
