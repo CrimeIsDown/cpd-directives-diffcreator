@@ -1,0 +1,64 @@
+/*
+
+Copyright c 2009 Xyleme, Inc., 2060 Broadway, Suite 250, Boulder, C0 80302 USA.
+All rights reserved.
+
+This file and related documentation are protected by copyright and
+are distributed under licenses regarding their use, copying, distribution,
+and decompilation. No part of this product or related documentation may
+be reproduced or transmitted in any form or by any means, electronic or
+mechanical, for any purpose, without the express written permission of
+Xyleme, Inc.
+
+*/
+
+/* ---------------- GENERAL DEFINITIONS ----------------- */
+
+/* 10pt -> 12px, 8pt -> 11px, 11pt -> 15px */
+
+HTML {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 13px;
+}
+
+TEXTAREA {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 13px;
+}
+
+TABLE {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 13px;
+}
+
+INPUT, SELECT, BUTTON {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+}
+
+INPUT[readonly] {
+        color: #686868;
+}       
+        
+
+/*
+     FILE ARCHIVED ON 23:02:40 Oct 23, 2020 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 20:41:37 Jan 29, 2023.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 152.6
+  exclusion.robots: 0.086
+  exclusion.robots.policy: 0.074
+  cdx.remote: 0.051
+  esindex: 0.006
+  LoadShardBlock: 127.175 (3)
+  PetaboxLoader3.datanode: 141.059 (5)
+  CDXLines.iter: 15.973 (3)
+  load_resource: 138.006 (2)
+  PetaboxLoader3.resolve: 78.746 (2)
+*/

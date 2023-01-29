@@ -31,6 +31,7 @@ if (preg_match('/^\/diff\/([a-z0-9]{40})\/directives\/data\/[a-z0-9\-]{45}\.html
     $GIT_PATH = __DIR__.'/../directives';
     $wrapper = new GitWrapper();
     if (file_exists($GIT_PATH)) {
+        $wrapper->git('config --global safe.directory '.realpath($GIT_PATH));
         $git = $wrapper->workingCopy($GIT_PATH);
     } else {
         http_response_code(500);
